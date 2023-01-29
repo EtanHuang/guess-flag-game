@@ -11,4 +11,4 @@ it, but really this game is open to anyone to give a try! This game was inspired
 * As a user, I want to be able to click on a button covering a flag to remove it.
 * As a user, I want to be able to type in my guess and receive feedback.
 * As a user, I want to be able to start a new game, and continue where I left off. 
-* As a user, I want to be able to add my game score to lifetime total score. 
+* As a user, I want to be able to add flags to a list of flags for each new game. 
