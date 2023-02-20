@@ -50,6 +50,7 @@ public class Game {
     public void run(int count) {
         int current = 1;
         int correct = 0;
+
         while (current <= count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
