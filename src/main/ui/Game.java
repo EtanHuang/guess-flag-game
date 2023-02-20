@@ -20,7 +20,7 @@ public class Game {
     }
 
     private void createGameList(int count) {
-        Scanner scan = null;
+        Scanner scan;
         try {
             scan = new Scanner(new File("data\\countries_old.txt"));
         } catch (FileNotFoundException e) {
@@ -39,16 +39,16 @@ public class Game {
         }
 
         // generates count random flags without duplication
-        while(gameList.getSize() <= count) {
+        while(gameList.getSize() < count) {
             Random random = new Random();
             int number = random.nextInt(fl.getSize());
             if(!gameList.contains(fl.getFlag(number))) {
                 gameList.addFlag(fl.getFlag(number));
             }
         }
-        //for(int i=1; i<=count; i++) {
-        // System.out.println(gameList.getFlag(i).getName());
-        // }
+        for(int i=1; i<=count; i++) {
+            System.out.println(gameList.getFlag(i).getName());
+        }
     }
 
     private void runGame() {
@@ -65,7 +65,8 @@ public class Game {
         createGameList(count);
         //System.out.println("What next?");
         int current = 1;
-        while(current <= gameList.getSize()) {
+        int correct = 0;
+        while(current <= count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
@@ -77,7 +78,9 @@ public class Game {
             else if (command.equals(currentFlag.getName()))
             {
                 System.out.println("You got it! Good job");
+                correct++;
                 current++;
+
             }
             else if (command.equals("give up")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
@@ -87,8 +90,8 @@ public class Game {
             {
                 System.out.println("Nope. Try again!");
             }
-
         }
+        System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
         System.out.println("Goodbye!");
     }
 
