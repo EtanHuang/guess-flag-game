@@ -12,4 +12,11 @@ public class FlagList {
     public void addFlag(Flag f) {
         this.flags.add(f);
     }
+
+    public int getSize() { return this.flags.size(); }
+
+    public Boolean contains(Flag f) { return this.flags.contains(f); }
+
+    // gets the flag with given index
+    public Flag getFlag(int n) { return flags.get(n-1); }
 }
