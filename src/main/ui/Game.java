@@ -20,7 +20,7 @@ public class Game {
     }
 
     private void createGameList(int count) {
-        Scanner scan;
+        Scanner scan = null;
         try {
             scan = new Scanner(new File("data\\countries_old.txt"));
         } catch (FileNotFoundException e) {
