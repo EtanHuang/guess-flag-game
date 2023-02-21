@@ -34,14 +34,9 @@ public class Game {
         String line = scan.nextLine();
         for (int i = 0; i < 228; i++) {
             String[] vals = line.split(",");
-            int id = parseInt(vals[0]);
-            String name = vals[1];
-            String code = vals[2];
-            String img = vals[3];
-            fl.addFlag(new Flag(name, id, img, code));
+            fl.addFlag(new Flag(vals[1], parseInt(vals[0]), vals[3], vals[2]));
             line = scan.nextLine();
         }
-        // generates count random flags without duplication
         while (gameList.getSize() < count) {
             Random random = new Random();
             int number = random.nextInt(fl.getSize());
