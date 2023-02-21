@@ -10,5 +10,5 @@ it, but really this game is open to anyone to give a try! This game was inspired
 
 * As a user, I want to be able to type in my guess and receive feedback.
 * As a user, I want to be able to choose between easy, normal and hard mode. 
-* As a user, I want to be able to see how many flags I guessed correctly for each game.
-* As a user, I want to be able to add flags to a list of flags for each new game. 
+* As a user, I want to be able to stop my current game and start a new game. 
+* As a user, I want to be able to add flags to a list of flags when starting a new game. 
