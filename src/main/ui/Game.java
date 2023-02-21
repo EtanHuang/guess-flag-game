@@ -19,7 +19,12 @@ public class Game {
         runGame();
     }
 
-    private void createGameList(int count) {
+    public FlagList getGameList() {
+        return this.gameList;
+    }
+
+    public void createGameList(int count) {
+        gameList = new FlagList();
         Scanner scan;
         try {
             scan = new Scanner(new File("data\\countries_old.txt"));
@@ -50,7 +55,6 @@ public class Game {
     public void run(int count) {
         int current = 1;
         int correct = 0;
-
         while (current <= count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
@@ -65,16 +69,16 @@ public class Game {
             } else if (command.toLowerCase().equals("skip")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
                 current++;
+            } else if (command.toLowerCase().equals("restart")) {
+                runGame();
             } else if (!command.equals(currentFlag.getName())) {
                 System.out.println("Nope. Try again!");
             }
         }
         System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
-        System.out.println("Goodbye!");
     }
 
     public void runGame() {
-        boolean keepGoing = true;
         System.out.println("How many Countries would you like to guess?");
         int count = parseInt(sc.nextLine());
         while (count <= 0 || count >= 229) {
