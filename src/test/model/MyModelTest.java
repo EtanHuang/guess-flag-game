@@ -13,6 +13,7 @@ class GameTest {
         testList = new FlagList();
     }
 
+
     @Test
     void testConstructor() {
         Flag china = new Flag("China", 1, "china.png", "CN");
