@@ -20,6 +20,7 @@ class GameTest {
         assertEquals("China", testList.getFlag(1).getName());
         assertTrue(testList.contains(china));
         assertEquals(1, testList.getSize());
+
     }
 
 
