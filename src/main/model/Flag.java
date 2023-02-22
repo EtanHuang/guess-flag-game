@@ -14,11 +14,11 @@ public class Flag {
         this.code = code;
     }
 
-    public int getId() {
+    public int getDiff() {
         return difficulty;
     }
 
-    public void setId(int diff) {
+    public void setDiff(int diff) {
         this.difficulty = diff;
     }
 
