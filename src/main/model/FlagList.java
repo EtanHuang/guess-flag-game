@@ -23,6 +23,10 @@ public class FlagList {
 
     // gets the flag with given index
     public Flag getFlag(int n) {
-        return flags.get(n - 1);
+        return flags.get(n);
+    }
+
+    public void clear() {
+        this.flags.clear();
     }
 }

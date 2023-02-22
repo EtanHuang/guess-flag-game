@@ -2,24 +2,24 @@ package model;
 
 public class Flag {
     private String name;
-    private int id;
+    private int difficulty;
     private String flag;
     private String code;
 
 
-    public Flag(String name, int id, String flag, String code) {
+    public Flag(String name, String code, String flag, int diff) {
         this.name = name;
-        this.id = id;
+        this.difficulty = diff;
         this.flag = flag;
         this.code = code;
     }
 
     public int getId() {
-        return id;
+        return difficulty;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int diff) {
+        this.difficulty = diff;
     }
 
     public String getName() {

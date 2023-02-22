@@ -15,11 +15,10 @@ class GameTest {
 
     @Test
     void testConstructor() {
-        Flag china = new Flag("China", 1, "china.png", "CN");
+        Flag china = new Flag("China",  "CN", "china.png", 1);
         testList.addFlag(china);
         assertEquals("China", testList.getFlag(1).getName());
         assertTrue(testList.contains(china));
         assertEquals(1, testList.getSize());
     }
-
 }

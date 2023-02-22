@@ -23,64 +23,87 @@ public class Game {
         return this.gameList;
     }
 
-    public void createGameList(int count) {
-        gameList = new FlagList();
+    public void getAllFlagsDifficulty(int d) {
         Scanner scan;
         try {
-            scan = new Scanner(new File("data\\countries_old.txt"));
+            scan = new Scanner(new File("data\\countries.txt"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         String line = scan.nextLine();
-        for (int i = 0; i < 228; i++) {
+        while (line != null) {
+            if (line.equals("break")) {
+                break;
+            }
             String[] vals = line.split(",");
-            fl.addFlag(new Flag(vals[1], parseInt(vals[0]), vals[3], vals[2]));
+            String name = vals[0];
+            String code = vals[1];
+            String image = vals[2];
+            int diff = Integer.parseInt(vals[3]);
+            if (d == diff) {
+                fl.addFlag(new Flag(name, code, image, diff));
+            }
             line = scan.nextLine();
         }
+    }
+
+    public void createGameList(int count, int diff) {
+        fl.clear();
+        gameList.clear();
+        getAllFlagsDifficulty(diff);
+        int number;
         while (gameList.getSize() < count) {
             Random random = new Random();
-            int number = random.nextInt(fl.getSize());
+            number = random.nextInt(fl.getSize());
             if (!gameList.contains(fl.getFlag(number))) {
                 gameList.addFlag(fl.getFlag(number));
             }
         }
     }
 
-
+    // MODIFIES: this
     public void run(int count) {
-        int current = 1;
+        int current = 0;
         int correct = 0;
-        while (current <= count) {
+        boolean restarted = false;
+        while (current < count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
             if (command.equals("quit")) {
                 System.out.println("Quitted");
                 break;
-            } else if (command.toLowerCase().equals(currentFlag.getName().toLowerCase())) {
+            } else if (command.equalsIgnoreCase("restart")) {
+                restarted = true;
+                break;
+            } else if (command.equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("You got it! Good job");
                 correct++;
                 current++;
-            } else if (command.toLowerCase().equals("skip")) {
+            } else if (command.equalsIgnoreCase("skip")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
                 current++;
-            } else if (command.toLowerCase().equals("restart")) {
-                runGame();
-            } else if (!command.equals(currentFlag.getName())) {
+            } else if (!command.equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("Nope. Try again!");
             }
         }
-        System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
+        if (restarted) {
+            runGame();
+        } else {
+            System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
+        }
     }
 
     public void runGame() {
         System.out.println("How many Countries would you like to guess?");
         int count = parseInt(sc.nextLine());
-        while (count <= 0 || count >= 229) {
-            System.out.println("Enter a number between 0-229!");
+        System.out.println("What difficulty would you like? 1 = Easy, 2 = Medium, 3 = Hard");
+        int diff = parseInt(sc.nextLine());
+        while (count < 0 || count >= 229) {
+            System.out.println("Enter a number between 1-229!");
             count = parseInt(sc.nextLine());
         }
-        createGameList(count);
+        createGameList(count, diff);
         run(count);
     }
 }

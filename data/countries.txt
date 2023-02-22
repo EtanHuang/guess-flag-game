@@ -28,7 +28,7 @@ Brazil,BR,brazil.png,1
 British Indian Ocean Territory,IO,thebritishindianoceanterritory.png,3
 British Virgin Islands,VG,britishvirginislands.png,3
 US Virgin Islands,VI,usvirginislands.png,3
-Brunei Darussalam,BN,bruneidarussalam.png,3
+Brunei,BN,bruneidarussalam.png,3
 Bulgaria,BG,bulgaria.png,3
 Burkina Faso,BF,burkinafaso.png,3
 Burundi,BI,burundi.png,3
@@ -92,7 +92,7 @@ Iceland,IS,iceland.png,2
 India,IN,india.png,1
 Indonesia,ID,indonesia.png,1
 Côte d'Ivoire,CI,côted'ivoire.png,3
-Iran (Islamic Republic of),IR,iran.png,3
+Iran,IR,iran.png,1
 Iraq,IQ,iraq.png,2
 Ireland,IE,ireland.png,2
 Israel,IL,israel.png,1
@@ -115,7 +115,7 @@ Liechtenstein,LI,liechtenstein.png,3
 Lithuania,LT,lithuania.png,3
 Luxembourg,LU,luxembourg.png,3
 Macao,MO,macao.png,2
-Macedonia (the former Yugoslav Republic of),MK,republicofnorthmacedonia.png,3
+Macedonia,MK,republicofnorthmacedonia.png,3
 Madagascar,MG,madagascar.png,3
 Malawi,MW,malawi.png,3
 Malaysia,MY,malaysia.png,2
@@ -128,8 +128,8 @@ Mauritania,MR,mauritania.png,3
 Mauritius,MU,mauritius.png,3
 Mayotte,YT,mayotte.png,3
 Mexico,MX,mexico.png,2
-Micronesia (Federated States of),FM,thefederatedstatesofmicronesia.png,3
-Moldova (Republic of),MD,therepublicofmoldova.png,3
+Micronesia,FM,thefederatedstatesofmicronesia.png,3
+Moldova,MD,therepublicofmoldova.png,3
 Monaco,MC,monaco.png,3
 Mongolia,MN,mongolia.png,3
 Montenegro,ME,montenegro.png,3
@@ -201,7 +201,7 @@ Switzerland,CH,switzerland.png,3
 Syrian Arab Republic,SY,syrianarabrepublic.png,3
 Taiwan,TW,taiwan.png,1
 Tajikistan,TJ,tajikistan.png,3
-United Republic of Tanzania,AF,tanzania.png,3
+Tanzania,AF,tanzania.png,3
 Thailand,TH,thailand.png,1
 Timor-Leste,TL,timor-leste.png,3
 Togo,TG,togo.png,3
@@ -221,9 +221,10 @@ USA,US,theunitedstatesofamerica.png,1
 Uruguay,UY,uruguay.png,2
 Uzbekistan,UZ,uzbekistan.png,3
 Vanuatu,VU,vanuatu.png,3
-Venezuela (Bolivarian Republic of),VE,venezuela.png,3
-Viet Nam,VN,vietnam.png,2
+Venezuela,VE,venezuela.png,3
+Vietnam,VN,vietnam.png,1
 Wallis and Futuna,WF,wallisandfutuna.png,3
 Yemen,YE,yemen.png,3
 Zambia,ZM,zambia.png,3
 Zimbabwe,ZW,zimbabwe.png,3
+break
