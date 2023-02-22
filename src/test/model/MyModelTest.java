@@ -14,12 +14,14 @@ class GameTest {
     }
 
     @Test
-    void testConstructor() {
+    void testFlagList() {
         Flag china = new Flag("China",  "CN", "china.png", 1);
         testList.addFlag(china);
         assertEquals("China", testList.getFlag(0).getName());
         assertTrue(testList.contains(china));
         assertEquals(1, testList.getSize());
+        testList.clear();
+        assertEquals(0, testList.getSize());
     }
 
     @Test
