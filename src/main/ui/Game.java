@@ -65,17 +65,15 @@ public class Game {
     public void run(int count) {
         int current = 0;
         int correct = 0;
-        boolean restarted = false;
         while (current < count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
             if (command.equals("quit")) {
-                System.out.println("Quitted");
-                break;
+                return;
             } else if (command.equalsIgnoreCase("restart")) {
-                restarted = true;
-                break;
+                restartGame();
+                return;
             } else if (command.equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("You got it! Good job");
                 correct++;
@@ -87,11 +85,11 @@ public class Game {
                 System.out.println("Nope. Try again!");
             }
         }
-        if (restarted) {
-            runGame();
-        } else {
-            System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
-        }
+        System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
+    }
+
+    public void restartGame() {
+        runGame();
     }
 
     public void runGame() {
