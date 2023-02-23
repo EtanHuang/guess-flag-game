@@ -167,7 +167,7 @@ Qatar,QA,qatar.png,2
 Kosovo,XK,kosovo.png,3
 Réunion,RE,réunion.png,3
 Romania,RO,romania.png,3
-Russian,RU,russianfederation.png,1
+Russia,RU,russianfederation.png,1
 Rwanda,RW,rwanda.png,3
 Saint Barthélemy,BL,saintbarthélemy.png,3
 Saint Helena Ascension and Tristan da Cunha,SH,sainthelena.png,3
@@ -216,7 +216,7 @@ Tuvalu,TV,tuvalu.png,3
 Uganda,UG,uganda.png,3
 Ukraine,UA,ukraine.png,2
 United Arab Emirates,AE,unitedarabemirates.png,3
-UK,GB,theunitedkingdomofgreatbritainandnorthernireland.png,1
+Great Britain,GB,theunitedkingdomofgreatbritainandnorthernireland.png,1
 USA,US,theunitedstatesofamerica.png,1
 Uruguay,UY,uruguay.png,2
 Uzbekistan,UZ,uzbekistan.png,3
