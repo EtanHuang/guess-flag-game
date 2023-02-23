@@ -34,11 +34,11 @@ class GameTest {
         canada.setDiff(1);
         canada.setName("Canada");
         canada.setCode("CA");
-        canada.setFlag("canada.png");
+        canada.setFile("canada.png");
         assertEquals(1, canada.getDiff());
         assertEquals("Canada", canada.getName());
         assertEquals("CA", canada.getCode());
-        assertEquals("canada.png", canada.getFlag());
+        assertEquals("canada.png", canada.getFile());
     }
 
     @Test
@@ -64,6 +64,6 @@ class GameTest {
         assertEquals(41, testList.returnIndex("China"));
         assertEquals(165, testList.returnIndex("Qatar"));
         assertEquals(-1, testList.returnIndex("Country Not Found"));
-
+        testList.clear();
     }
 }

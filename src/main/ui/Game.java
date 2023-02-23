@@ -10,11 +10,13 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+// Game Application
 public class Game {
     private FlagList fl = new FlagList();
     private FlagList gameList = new FlagList();
     Scanner sc = new Scanner(System.in);
 
+    // EFFECTS: Runs the Game Application
     public Game() {
         runGame();
     }
@@ -23,6 +25,8 @@ public class Game {
         return this.gameList;
     }
 
+    // MODIFIES: this
+    // EFFECTS: gets all flags of a difficulty from 1-3
     public void getAllFlagsDifficulty(int d) {
         Scanner scan;
         try {
@@ -47,6 +51,8 @@ public class Game {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a game list with count flags and given difficulty
     public void createGameList(int count, int diff) {
         fl.clear();
         gameList.clear();
@@ -62,6 +68,7 @@ public class Game {
     }
 
     // MODIFIES: this
+    // EFFECTS: processes user commands
     public void run(int count) {
         int current = 0;
         int correct = 0;
@@ -88,10 +95,13 @@ public class Game {
         System.out.println("You got " + Integer.toString(correct) + "/" + count + ".");
     }
 
+    // EFFECTS: restarts game
     public void restartGame() {
         runGame();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     public void runGame() {
         System.out.println("How many Countries would you like to guess?");
         int count = parseInt(sc.nextLine());

@@ -1,16 +1,17 @@
 package model;
 
+// Class representation of a Flag with a name, difficulty, file name and a code.
 public class Flag {
-    private String name;
-    private int difficulty;
-    private String flag;
-    private String code;
+    private String name; // name of the country
+    private int difficulty; // difficulty to guess (1 = easiest, 3 = hardest)
+    private String file; // file name of the png
+    private String code; // 2 letter abbreviation of the country name
 
 
-    public Flag(String name, String code, String flag, int diff) {
+    public Flag(String name, String code, String file, int diff) {
         this.name = name;
         this.difficulty = diff;
-        this.flag = flag;
+        this.file = file;
         this.code = code;
     }
 
@@ -38,12 +39,12 @@ public class Flag {
         this.code = code;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getFile() {
+        return file;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setFile(String file) {
+        this.file = file;
     }
 
 }
