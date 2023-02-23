@@ -29,4 +29,13 @@ public class FlagList {
     public void clear() {
         this.flags.clear();
     }
+
+    public int returnIndex(String target) {
+        for (int i = 0; i < this.flags.size(); i++) {
+            if (this.flags.get(i).getName().equals(target)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

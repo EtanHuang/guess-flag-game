@@ -3,6 +3,10 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -35,5 +39,31 @@ class GameTest {
         assertEquals("Canada", canada.getName());
         assertEquals("CA", canada.getCode());
         assertEquals("canada.png", canada.getFlag());
+    }
+
+    @Test
+    void testReturnIndex() {
+        Scanner scan;
+        try {
+            scan = new Scanner(new File("data\\countries.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line = scan.nextLine();
+        while (line != null) {
+            if (line.equals("break")) {
+                break;
+            }
+            String[] vals = line.split(",");
+            testList.addFlag(new Flag(vals[0], vals[1], vals[2], Integer.parseInt(vals[3])));
+            line = scan.nextLine();
+        }
+        assertEquals(0, testList.returnIndex("Afghanistan"));
+        assertEquals(228, testList.returnIndex("Zimbabwe"));
+        assertEquals(98, testList.returnIndex("Italy"));
+        assertEquals(41, testList.returnIndex("China"));
+        assertEquals(165, testList.returnIndex("Qatar"));
+        assertEquals(-1, testList.returnIndex("Country Not Found"));
+
     }
 }
