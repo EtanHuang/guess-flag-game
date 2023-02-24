@@ -12,8 +12,8 @@ import static java.lang.Integer.parseInt;
 
 // Game Application
 public class Game {
-    private FlagList fl = new FlagList();
-    private FlagList gameList = new FlagList();
+    private FlagList allFlagsOfDifficulty = new FlagList(); // All flags of a specific difficulty
+    private FlagList gameList = new FlagList(); // Flags for each game
     Scanner sc = new Scanner(System.in);
 
     // EFFECTS: Runs the Game Application
@@ -45,7 +45,7 @@ public class Game {
             String image = vals[2];
             int diff = Integer.parseInt(vals[3]);
             if (d == diff) {
-                fl.addFlag(new Flag(name, code, image, diff));
+                allFlagsOfDifficulty.addFlag(new Flag(name, code, image, diff));
             }
             line = scan.nextLine();
         }
@@ -54,15 +54,15 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: creates a game list with count flags and given difficulty
     public void createGameList(int count, int diff) {
-        fl.clear();
+        allFlagsOfDifficulty.clear();
         gameList.clear();
         getAllFlagsDifficulty(diff);
         int number;
         while (gameList.getSize() < count) {
             Random random = new Random();
-            number = random.nextInt(fl.getSize());
-            if (gameList.returnIndex(fl.getFlag(number).getName()) == -1) {
-                gameList.addFlag(fl.getFlag(number));
+            number = random.nextInt(allFlagsOfDifficulty.getSize());
+            if (!gameList.contains(gameList.getFlag(number))) {
+                gameList.addFlag(allFlagsOfDifficulty.getFlag(number));
             }
         }
     }

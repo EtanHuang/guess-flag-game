@@ -40,9 +40,9 @@ Comoros,KM,comoros.png,3
 Congo,CG,congo.png,3
 Democratic Republic of Congo,CD,democraticrepublicofcongo.png,3
 Cook Islands,CK,thecookislands.png,3
-Costa Rica,CR,costarica.png,3
+Costa Rica,CR,costarica.png,1
 Croatia,HR,croatia.png,3
-Cuba,CU,cuba.png,2
+Cuba,CU,cuba.png,1
 Cyprus,CY,cyprus.png,3
 Czech Republic,CZ,czechia.png,2
 Denmark,DK,denmark.png,1
@@ -67,7 +67,7 @@ Georgia,GE,georgia.png,3
 Germany,DE,germany.png,1
 Ghana,GH,ghana.png,2
 Gibraltar,GI,gibraltar.png,3
-Greece,GR,greece.png,2
+Greece,GR,greece.png,1
 Greenland,GL,greenland.png,3
 Grenada,GD,grenada.png,3
 Guam,GU,guam.png,3
@@ -85,9 +85,9 @@ India,IN,india.png,1
 Indonesia,ID,indonesia.png,1
 Cote d'Ivoire,CI,côted'ivoire.png,3
 Iran,IR,iran.png,1
-Iraq,IQ,iraq.png,2
+Iraq,IQ,iraq.png,1
 Ireland,IE,ireland.png,2
-Israel,IL,israel.png,1
+Israel,IL,israel.png,2
 Italy,IT,italy.png,1
 Jamaica,JM,jamaica.png,2
 Japan,JP,japan.png,1
@@ -99,7 +99,7 @@ Kuwait,KW,kuwait.png,3
 Kyrgyzstan,KG,kyrgyzstan.png,3
 Laos,LA,thelaopeoplesdemocraticrepublic.png,3
 Latvia,LV,latvia.png,3
-Lebanon,LB,lebanon.png,3
+Lebanon,LB,lebanon.png,2
 Lesotho,LS,lesotho.png,3
 Liberia,LR,liberia.png,3
 Libya,LY,libya.png,3
@@ -117,7 +117,7 @@ Malta,MT,malta.png,3
 Marshall Islands,MH,themarshallislands.png,3
 Mauritania,MR,mauritania.png,3
 Mauritius,MU,mauritius.png,3
-Mexico,MX,mexico.png,2
+Mexico,MX,mexico.png,1
 Micronesia,FM,thefederatedstatesofmicronesia.png,3
 Moldova,MD,therepublicofmoldova.png,3
 Monaco,MC,monaco.png,3
@@ -140,7 +140,7 @@ Niue,NU,niue.png,3
 North Korea,KP,thedemocraticpeoplesrepublicofkorea.png,1
 Norway,NO,norway.png,1
 Oman,OM,oman.png,3
-Pakistan,PK,pakistan.png,1
+Pakistan,PK,pakistan.png,2
 Palau,PW,palau.png,3
 Palestine,PS,palestine.png,3
 Panama,PA,panama.png,2
@@ -163,7 +163,7 @@ Saint Vincent and the Grenadines,VC,saintvincentandthegrenadines.png,3
 Samoa,WS,samoa.png,3
 San Marino,SM,sanmarino.png,3
 Sao Tome and Principe,ST,saotomeandprincipe.png,3
-Saudi Arabia,SA,saudiarabia.png,2
+Saudi Arabia,SA,saudiarabia.png,1
 Senegal,SN,senegal.png,3
 Serbia,RS,serbia.png,3
 Seychelles,SC,seychelles.png,3
@@ -173,8 +173,8 @@ Slovakia,SK,slovakia.png,2
 Slovenia,SI,slovenia.png,3
 Solomon Islands,SB,solomonislands.png,3
 Somalia,SO,somalia.png,3
-South Africa,ZA,southafrica.png,1
-South Korea,KR,therepublicofkorea.png,1
+South Africa,ZA,southafrica.png,2
+South Korea,KR,therepublicofkorea.png,2
 Spain,ES,spain.png,1
 Sri Lanka,LK,srilanka.png,3
 Sudan,SD,sudan.png,3

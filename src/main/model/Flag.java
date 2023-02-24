@@ -1,6 +1,6 @@
 package model;
 
-// Class representation of a Flag with a name, difficulty, file name and a code.
+// Class representation of a Flag with a name, difficulty, file name and a 2 letter code.
 public class Flag {
     private String name; // name of the country
     private int difficulty; // difficulty to guess (1 = easiest, 3 = hardest)

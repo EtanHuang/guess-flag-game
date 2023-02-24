@@ -6,24 +6,29 @@ import java.util.ArrayList;
 public class FlagList {
     private ArrayList<Flag> flags;
 
+    // EFFECTS: creates an empty list to store Flag objects.
     public FlagList() {
         this.flags = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a flag to the back of flags
     public void addFlag(Flag f) {
         this.flags.add(f);
     }
 
+    // EFFECTS: returns the size of flags
     public int getSize() {
         return this.flags.size();
     }
 
-    // REQUIRES: flags.getSize() >= 1
-    // EFFECTS: returns a boolean representing whether flag is in flag list
+    // EFFECTS: returns a boolean representing whether given flag is in flags
     public boolean contains(Flag f) {
         return this.flags.contains(f);
     }
 
+    // REQUIRES: flags.getSize() > n
+    // EFFECTS: returns the flag at index n
     public Flag getFlag(int n) {
         return flags.get(n);
     }
@@ -34,7 +39,6 @@ public class FlagList {
         this.flags.clear();
     }
 
-    // REQUIRES: flags.getSize >= 1
     // EFFECTS: returns the index of a flag in the flag list given the name
     public int returnIndex(String target) {
         for (int i = 0; i < this.flags.size(); i++) {
