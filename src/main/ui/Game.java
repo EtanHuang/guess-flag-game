@@ -26,7 +26,7 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: gets all flags of a difficulty from 1-3
+    // EFFECTS: creates a list with all flags of a difficulty from 1-3
     public void getAllFlagsDifficulty(int d) {
         Scanner scan;
         try {
@@ -61,7 +61,7 @@ public class Game {
         while (gameList.getSize() < count) {
             Random random = new Random();
             number = random.nextInt(fl.getSize());
-            if (!gameList.contains(fl.getFlag(number))) {
+            if (gameList.returnIndex(fl.getFlag(number).getName()) == -1) {
                 gameList.addFlag(fl.getFlag(number));
             }
         }
@@ -107,8 +107,8 @@ public class Game {
         int count = parseInt(sc.nextLine());
         System.out.println("What difficulty would you like? 1 = Easy, 2 = Medium, 3 = Hard");
         int diff = parseInt(sc.nextLine());
-        while (count < 0 || count >= 229) {
-            System.out.println("Enter a number between 1-229!");
+        while (count < 0 || count > 210) {
+            System.out.println("Enter a number between 1-210!");
             count = parseInt(sc.nextLine());
         }
         createGameList(count, diff);

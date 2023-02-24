@@ -59,10 +59,10 @@ class GameTest {
             line = scan.nextLine();
         }
         assertEquals(0, testList.returnIndex("Afghanistan"));
-        assertEquals(228, testList.returnIndex("Zimbabwe"));
-        assertEquals(98, testList.returnIndex("Italy"));
-        assertEquals(41, testList.returnIndex("China"));
-        assertEquals(165, testList.returnIndex("Qatar"));
+        assertEquals(209, testList.returnIndex("Zimbabwe"));
+        assertEquals(90, testList.returnIndex("Italy"));
+        assertEquals(36, testList.returnIndex("China"));
+        assertEquals(153, testList.returnIndex("Qatar"));
         assertEquals(-1, testList.returnIndex("Country Not Found"));
         testList.clear();
     }
