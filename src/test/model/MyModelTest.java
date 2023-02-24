@@ -3,11 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameTest {
     private FlagList testList;
@@ -43,27 +40,17 @@ class GameTest {
 
     @Test
     void testReturnIndex() {
-        Scanner scan;
-        try {
-            scan = new Scanner(new File("data\\countries.txt"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        String line = scan.nextLine();
-        while (line != null) {
-            if (line.equals("break")) {
-                break;
-            }
-            String[] vals = line.split(",");
-            testList.addFlag(new Flag(vals[0], vals[1], vals[2], Integer.parseInt(vals[3])));
-            line = scan.nextLine();
-        }
+        testList.addFlag(new Flag("Afghanistan", "AF", "afghanistan.png", 1));
+        testList.addFlag(new Flag("Italy", "IT", "italy.png", 1));
+        testList.addFlag(new Flag("China", "CN", "china.png", 1));
+        testList.addFlag(new Flag("Qatar", "QA", "qatar.png", 1));
+
         assertEquals(0, testList.returnIndex("Afghanistan"));
-        assertEquals(209, testList.returnIndex("Zimbabwe"));
-        assertEquals(90, testList.returnIndex("Italy"));
-        assertEquals(36, testList.returnIndex("China"));
-        assertEquals(153, testList.returnIndex("Qatar"));
-        assertEquals(-1, testList.returnIndex("Country Not Found"));
+        assertEquals(1, testList.returnIndex("Italy"));
+        assertEquals(2, testList.returnIndex("China"));
+        assertEquals(3, testList.returnIndex("Qatar"));
+        assertEquals(-1, testList.returnIndex("Canada"));
         testList.clear();
+        assertEquals(0, testList.getSize());
     }
 }
