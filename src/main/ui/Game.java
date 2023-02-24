@@ -87,6 +87,7 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: processes user commands
     Scanner sc = new Scanner(System.in);
+
     public void run(int count) {
         int current = 0;
         int correct = 0;
