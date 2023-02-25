@@ -16,6 +16,7 @@ public class Game {
     private FlagList diff2 = new FlagList(); // All flags of difficulty 2
     private FlagList diff3 = new FlagList(); // All flags of difficulty 3
     private FlagList gameList = new FlagList(); // Stores flags for a game
+    Scanner sc = new Scanner(System.in);
 
     // EFFECTS: Runs the Game Application
     public Game() {
@@ -86,8 +87,6 @@ public class Game {
 
     // MODIFIES: this
     // EFFECTS: processes user commands
-    Scanner sc = new Scanner(System.in);
-
     public void run(int count) {
         int current = 0;
         int correct = 0;
@@ -100,14 +99,14 @@ public class Game {
             } else if (command.equalsIgnoreCase("restart")) {
                 restartGame();
                 return;
-            } else if (command.equalsIgnoreCase(currentFlag.getName())) {
+            } else if (command.trim().equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("You got it! Good job");
                 correct++;
                 current++;
             } else if (command.equalsIgnoreCase("skip")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
                 current++;
-            } else if (!command.equalsIgnoreCase(currentFlag.getName())) {
+            } else if (!command.trim().equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("Nope. Try again!");
             }
         }
@@ -134,35 +133,55 @@ public class Game {
         }
     }
 
-    // EFFECTS: restarts game
+    // EFFECTS: restarts the game
     public void restartGame() {
         runGame();
+    }
+
+    // EFFECTS: processes user input for difficulty
+    public int inputDifficulty() {
+        System.out.println("What difficulty would you like? 1 = Easy, 2 = Medium, 3 = Hard");
+        int difficulty = 0;
+        do {
+            System.out.println("Enter a number from 1-3 please");
+            difficulty = parseInt(sc.nextLine());
+        } while (difficulty < 1 || difficulty > 3);
+        return difficulty;
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     public void runGame() {
-        System.out.println("What difficulty would you like? 1 = Easy, 2 = Medium, 3 = Hard");
-        int diff = parseInt(sc.nextLine());
-        System.out.println("How many Countries would you like to guess?");
+        int diff = inputDifficulty();
+        System.out.println("How many countries would you like to guess?");
         int count = parseInt(sc.nextLine());
         if (1 == diff) {
-            while (count < 0 || count > 41) {
-                System.out.println("Enter a number between 1-41");
+            while (count < 0 || count > diff1.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(diff1.getSize()));
                 count = parseInt(sc.nextLine());
             }
         } else if (2 == diff) {
-            while (count < 0 || count > 26) {
-                System.out.println("Enter a number between 1-26");
+            while (count < 0 || count > diff2.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(diff2.getSize()));
                 count = parseInt(sc.nextLine());
             }
         } else if (3 == diff) {
-            while (count < 0 || count > 144) {
-                System.out.println("Enter a number between 1-144");
+            while (count < 0 || count > diff3.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(diff3.getSize()));
                 count = parseInt(sc.nextLine());
             }
         }
         createGameList(count, diff);
+        showInfo();
         run(count);
+    }
+
+    // EFFECTS: displays game commands for the user
+    public void showInfo() {
+        System.out.println("**********************************");
+        System.out.println("Enter quit to quit the game");
+        System.out.println("Enter restart to start a new game");
+        System.out.println("Enter skip to skip the current country");
+        System.out.println("**********************************");
     }
 }
