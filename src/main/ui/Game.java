@@ -24,10 +24,6 @@ public class Game {
         runGame();
     }
 
-    public FlagList getGameList() {
-        return this.gameList;
-    }
-
     // EFFECTS: scans the flags file
     public void scanFile() {
         Scanner scan;
@@ -63,8 +59,9 @@ public class Game {
         }
     }
 
+    // REQUIRES: 1 <= diff <= 3
     // MODIFIES: this
-    // EFFECTS: creates a game list with count flags and given difficulty
+    // EFFECTS: creates a game list of count flags with given difficulty
     public void createGameList(int count, int diff) {
         gameList.clear();
         FlagList difficulty = new FlagList();
@@ -94,16 +91,16 @@ public class Game {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
-            if (command.equals("quit")) {
+            if (command.trim().equals("quit")) {
                 return;
-            } else if (command.equalsIgnoreCase("restart")) {
+            } else if (command.trim().equalsIgnoreCase("restart")) {
                 restartGame();
                 return;
             } else if (command.trim().equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("You got it! Good job");
                 correct++;
                 current++;
-            } else if (command.equalsIgnoreCase("skip")) {
+            } else if (command.trim().equalsIgnoreCase("skip")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
                 current++;
             } else if (!command.trim().equalsIgnoreCase(currentFlag.getName())) {
