@@ -41,7 +41,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses Game from JSON object and returns it
     private Game parseWorkRoom(JSONObject jsonObject) {
         int answered = jsonObject.getInt("answered");
         int correct = jsonObject.getInt("correct");
@@ -52,8 +52,7 @@ public class JsonReader {
         return g;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses FlagList from JSONArray
     private FlagList parseFlagList(JSONArray jsonArray) {
         FlagList fl = new FlagList();
         for (Object json : jsonArray) {
@@ -63,6 +62,7 @@ public class JsonReader {
         return fl;
     }
 
+    // EFFECTS: parses Flag from FlagList
     private Flag parseFlag(JSONObject flag) {
         String name = flag.getString("name");
         String file = flag.getString("file");

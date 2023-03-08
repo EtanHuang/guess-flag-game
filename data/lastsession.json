@@ -1,37 +1,37 @@
 {
     "difficulty": 1,
     "answered": 4,
-    "correct": 2,
+    "correct": 4,
     "gameList": [
         {
             "difficulty": 1,
-            "file": "france.png",
-            "code": "FR",
-            "name": "France"
+            "file": "denmark.png",
+            "code": "DK",
+            "name": "Denmark"
         },
         {
             "difficulty": 1,
-            "file": "mexico.png",
-            "code": "MX",
-            "name": "Mexico"
+            "file": "japan.png",
+            "code": "JP",
+            "name": "Japan"
         },
         {
             "difficulty": 1,
-            "file": "hongkong.png",
-            "code": "HK",
-            "name": "Hong Kong"
+            "file": "norway.png",
+            "code": "NO",
+            "name": "Norway"
         },
         {
             "difficulty": 1,
-            "file": "poland.png",
-            "code": "PL",
-            "name": "Poland"
+            "file": "thailand.png",
+            "code": "TH",
+            "name": "Thailand"
         },
         {
             "difficulty": 1,
-            "file": "newzealand.png",
-            "code": "NZ",
-            "name": "New Zealand"
+            "file": "netherlands.png",
+            "code": "NL",
+            "name": "Netherlands"
         }
     ]
 }

@@ -24,7 +24,6 @@ public class GameApp {
     private static final String JSON_STORE = "./data/lastsession.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private model.Game lastSession;
     private int correct;
     private int current;
     private int diff;
@@ -36,7 +35,6 @@ public class GameApp {
         jsonReader = new JsonReader(JSON_STORE);
         scanFile();
         loadGame();
-        runGame();
     }
 
     // EFFECTS: scans the flags file
@@ -75,18 +73,23 @@ public class GameApp {
     }
 
     public void loadGame() {
-        System.out.println("Would you like to load your game from last time?");
+        System.out.println("Would you like to load your game from last time? Y - yes, N - no");
         String yesNo = sc.nextLine();
         if (yesNo.trim().equalsIgnoreCase("y")) {
             try {
                 game = jsonReader.read();
                 System.out.println("Loaded from " + JSON_STORE);
+                this.diff = game.getDifficulty();
+                this.current = game.getAnswered();
+                this.correct = game.getCorrect();
+                this.gameList = game.getGameList();
+                run(current, game.getGameList().getSize());
                 return;
             } catch (IOException e) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
         } else {
-            return;
+            runGame();
         }
     }
 
@@ -114,15 +117,13 @@ public class GameApp {
 
     // MODIFIES: this
     // EFFECTS: processes user commands
-    public void run(int count) {
-        current = 0;
-        correct = 0;
-        while (current < count) {
-            Flag currentFlag = gameList.getFlag(current);
+    public void run(int start, int count) {
+        while (start < count) {
+            Flag currentFlag = gameList.getFlag(start);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
             if (command.trim().equals("quit")) {
-                quitMenu();
+                quitMenu(start);
                 return;
             } else if (command.trim().equalsIgnoreCase("restart")) {
                 restartGame();
@@ -130,10 +131,10 @@ public class GameApp {
             } else if (command.trim().equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("You got it! Good job");
                 correct++;
-                current++;
+                start++;
             } else if (command.trim().equalsIgnoreCase("skip")) {
                 System.out.println("The correct answer was " + currentFlag.getName());
-                current++;
+                start++;
             } else if (!command.trim().equalsIgnoreCase(currentFlag.getName())) {
                 System.out.println("Nope. Try again!");
             }
@@ -142,13 +143,13 @@ public class GameApp {
     }
 
     // EFFECTS: displays the quit menu to the user
-    public void quitMenu() {
+    public void quitMenu(int start) {
         System.out.println("Would you like to save your game? Y - Yes N - No");
         String yesNo = sc.nextLine();
         if (yesNo.trim().equalsIgnoreCase("y")) {
             try {
                 jsonWriter.open();
-                Game currentGame = new Game(gameList, current, correct, diff);
+                Game currentGame = new Game(gameList, start, correct, diff);
                 jsonWriter.write(currentGame);
                 System.out.println("Your game was successfully saved to " + JSON_STORE + ".");
                 System.out.println("Goodbye!");
@@ -223,7 +224,9 @@ public class GameApp {
         }
         createGameList(count);
         showInfo();
-        run(count);
+        current = 0;
+        correct = 0;
+        run(current, count);
     }
 
     // EFFECTS: displays game commands for the user
