@@ -8,6 +8,7 @@ import persistence.JsonWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,12 +28,14 @@ public class GameApp {
     private int correct;
     private int current;
     private int diff;
+    private Game game;
 
     // EFFECTS: Runs the Game Application
     public GameApp() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         scanFile();
+        loadGame();
         runGame();
     }
 
@@ -60,14 +63,30 @@ public class GameApp {
             String code = vals[1];
             String image = vals[2];
             int diff = Integer.parseInt(vals[3]);
-            if (1 == diff) {
+            if (diff == 1) {
                 diff1.addFlag(new Flag(name, code, image, diff));
-            } else if (2 == diff) {
+            } else if (diff == 2) {
                 diff2.addFlag(new Flag(name, code, image, diff));
-            } else if (3 == diff) {
+            } else if (diff == 3) {
                 diff3.addFlag(new Flag(name, code, image, diff));
             }
             line = scan.nextLine();
+        }
+    }
+
+    public void loadGame() {
+        System.out.println("Would you like to load your game from last time?");
+        String yesNo = sc.nextLine();
+        if (yesNo.trim().equalsIgnoreCase("y")) {
+            try {
+                game = jsonReader.read();
+                System.out.println("Loaded from " + JSON_STORE);
+                return;
+            } catch (IOException e) {
+                System.out.println("Unable to read from file: " + JSON_STORE);
+            }
+        } else {
+            return;
         }
     }
 
@@ -138,11 +157,10 @@ public class GameApp {
                 throw new RuntimeException(e);
             }
         } else {
+            System.out.println("Goodbye!");
             return;
         }
     }
-
-
 
     // EFFECTS: processes end game user commands
     public void endGame(int correct, int count) {
@@ -163,6 +181,8 @@ public class GameApp {
             }
         }
     }
+
+
 
     // EFFECTS: restarts the game
     public void restartGame() {
