@@ -8,7 +8,12 @@ it, but really this game is open to anyone to give a try! This game was inspired
 
 ## User Stories
 
+Phase 1: 
 * As a user, I want to be able to type in my guess and receive feedback.
 * As a user, I want to be able to choose between easy, normal and hard mode. 
 * As a user, I want to be able to stop my current game and start a new game. 
 * As a user, I want to be able to add a desired number of flags to a list of flags when starting a new game. 
+
+ Phase 2:
+* As a user, I want to be able to resume from where I left off in my previous games. 
+* As a user, I want to be able to have the option to save my game to file when I quit.
