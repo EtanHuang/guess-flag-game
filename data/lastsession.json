@@ -1,0 +1,31 @@
+{
+    "difficulty": 1,
+    "answered": 2,
+    "correct": 2,
+    "gameList": [
+        {
+            "difficulty": 1,
+            "file": "thedemocraticpeoplesrepublicofkorea.png",
+            "code": "KP",
+            "name": "North Korea"
+        },
+        {
+            "difficulty": 1,
+            "file": "spain.png",
+            "code": "ES",
+            "name": "Spain"
+        },
+        {
+            "difficulty": 1,
+            "file": "newzealand.png",
+            "code": "NZ",
+            "name": "New Zealand"
+        },
+        {
+            "difficulty": 1,
+            "file": "theunitedkingdomofgreatbritainandnorthernireland.png",
+            "code": "GB",
+            "name": "Great Britain"
+        }
+    ]
+}

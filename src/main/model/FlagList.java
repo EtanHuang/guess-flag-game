@@ -11,6 +11,8 @@ public class FlagList {
         this.flags = new ArrayList<>();
     }
 
+    public ArrayList<Flag> getFlags() { return this.flags; }
+
     // MODIFIES: this
     // EFFECTS: adds a flag to the back of flags
     public void addFlag(Flag f) {

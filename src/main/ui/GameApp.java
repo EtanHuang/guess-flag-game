@@ -2,6 +2,9 @@ package ui;
 
 import model.Flag;
 import model.FlagList;
+import model.Game;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,15 +14,24 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 // Game Application
-public class Game {
+public class GameApp {
     private FlagList diff1 = new FlagList(); // All flags of difficulty 1
     private FlagList diff2 = new FlagList(); // All flags of difficulty 2
     private FlagList diff3 = new FlagList(); // All flags of difficulty 3
     private FlagList gameList = new FlagList(); // Stores flags for a game
     Scanner sc = new Scanner(System.in);
+    private static final String JSON_STORE = "./data/lastsession.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private model.Game lastSession;
+    private int correct;
+    private int current;
+    private int diff;
 
     // EFFECTS: Runs the Game Application
-    public Game() {
+    public GameApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         scanFile();
         runGame();
     }
@@ -62,22 +74,21 @@ public class Game {
     // REQUIRES: 1 <= diff <= 3
     // MODIFIES: this
     // EFFECTS: creates a game list of count flags with given difficulty
-    public void createGameList(int count, int diff) {
+    public void createGameList(int count) {
         gameList.clear();
-        FlagList difficulty = new FlagList();
+        FlagList fl = new FlagList();
         if (1 == diff) {
-            difficulty = diff1;
+            fl = diff1;
         } else if (2 == diff) {
-            difficulty = diff2;
+            fl = diff2;
         } else if (3 == diff) {
-            difficulty = diff3;
+            fl = diff3;
         }
-        int number;
         while (gameList.getSize() < count) {
             Random random = new Random();
-            number = random.nextInt(difficulty.getSize());
-            if (!gameList.contains(difficulty.getFlag(number))) {
-                gameList.addFlag(difficulty.getFlag(number));
+            int number = random.nextInt(fl.getSize());
+            if (!gameList.contains(fl.getFlag(number))) {
+                gameList.addFlag(fl.getFlag(number));
             }
         }
     }
@@ -85,13 +96,14 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: processes user commands
     public void run(int count) {
-        int current = 0;
-        int correct = 0;
+        current = 0;
+        correct = 0;
         while (current < count) {
             Flag currentFlag = gameList.getFlag(current);
             System.out.println(currentFlag.getCode());
             String command = sc.nextLine();
             if (command.trim().equals("quit")) {
+                quitMenu();
                 return;
             } else if (command.trim().equalsIgnoreCase("restart")) {
                 restartGame();
@@ -109,6 +121,28 @@ public class Game {
         }
         endGame(correct, count);
     }
+
+    // EFFECTS: displays the quit menu to the user
+    public void quitMenu() {
+        System.out.println("Would you like to save your game? Y - Yes N - No");
+        String yesNo = sc.nextLine();
+        if (yesNo.trim().equalsIgnoreCase("y")) {
+            try {
+                jsonWriter.open();
+                Game currentGame = new Game(gameList, current, correct, diff);
+                jsonWriter.write(currentGame);
+                System.out.println("Your game was successfully saved to " + JSON_STORE + ".");
+                System.out.println("Goodbye!");
+                jsonWriter.close();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return;
+        }
+    }
+
+
 
     // EFFECTS: processes end game user commands
     public void endGame(int correct, int count) {
@@ -136,20 +170,19 @@ public class Game {
     }
 
     // EFFECTS: processes user input for difficulty
-    public int inputDifficulty() {
+    public void inputDifficulty() {
         System.out.println("What difficulty would you like? 1 = Easy, 2 = Medium, 3 = Hard");
-        int difficulty = 0;
+        diff = 0;
         do {
             System.out.println("Enter a number from 1-3 please");
-            difficulty = parseInt(sc.nextLine());
-        } while (difficulty < 1 || difficulty > 3);
-        return difficulty;
+            diff = parseInt(sc.nextLine());
+        } while (diff < 1 || diff > 3);
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     public void runGame() {
-        int diff = inputDifficulty();
+        inputDifficulty();
         System.out.println("How many countries would you like to guess?");
         int count = parseInt(sc.nextLine());
         if (1 == diff) {
@@ -168,7 +201,7 @@ public class Game {
                 count = parseInt(sc.nextLine());
             }
         }
-        createGameList(count, diff);
+        createGameList(count);
         showInfo();
         run(count);
     }

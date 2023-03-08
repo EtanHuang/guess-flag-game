@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Class representation of a Flag with a name, difficulty, file name and a 2 letter code.
 public class Flag {
     private String name; // name of the country
@@ -45,6 +47,15 @@ public class Flag {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("difficulty", difficulty);
+        json.put("file", file);
+        json.put("code", code);
+        return json;
     }
 
 }
