@@ -1,37 +1,6 @@
 {
-    "difficulty": 1,
-    "answered": 4,
-    "correct": 4,
-    "gameList": [
-        {
-            "difficulty": 1,
-            "file": "denmark.png",
-            "code": "DK",
-            "name": "Denmark"
-        },
-        {
-            "difficulty": 1,
-            "file": "japan.png",
-            "code": "JP",
-            "name": "Japan"
-        },
-        {
-            "difficulty": 1,
-            "file": "norway.png",
-            "code": "NO",
-            "name": "Norway"
-        },
-        {
-            "difficulty": 1,
-            "file": "thailand.png",
-            "code": "TH",
-            "name": "Thailand"
-        },
-        {
-            "difficulty": 1,
-            "file": "netherlands.png",
-            "code": "NL",
-            "name": "Netherlands"
-        }
-    ]
+    "difficulty": 0,
+    "answered": 0,
+    "correct": 0,
+    "gameList": []
 }

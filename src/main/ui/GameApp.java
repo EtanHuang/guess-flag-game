@@ -5,6 +5,7 @@ import model.FlagList;
 import model.Game;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import model.exceptions.NoSavedGameException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,13 +29,13 @@ public class GameApp {
     private int current;
     private int diff;
     private Game game;
+    boolean loaded = false;
 
     // EFFECTS: Runs the Game Application
-    public GameApp() {
+    public GameApp() throws NoSavedGameException {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         scanFile();
-        loadGame();
     }
 
     // EFFECTS: scans the flags file
@@ -72,17 +73,22 @@ public class GameApp {
         }
     }
 
-    public void loadGame() {
+    public void loadGame() throws NoSavedGameException {
         System.out.println("Would you like to load your game from last time? Y - yes, N - no");
         String yesNo = sc.nextLine();
         if (yesNo.trim().equalsIgnoreCase("y")) {
             try {
                 game = jsonReader.read();
-                System.out.println("Loaded from " + JSON_STORE);
                 this.diff = game.getDifficulty();
                 this.current = game.getAnswered();
                 this.correct = game.getCorrect();
                 this.gameList = game.getGameList();
+                loaded = true;
+                if ((diff == 0) && (current == 0) && (correct == 0) && gameList.getSize() == 0) {
+                    throw new NoSavedGameException("You don't have a saved game! You must start a new game.");
+                }
+                System.out.println("Loaded from " + JSON_STORE);
+                showInfo();
                 run(current, game.getGameList().getSize());
                 return;
             } catch (IOException e) {
@@ -99,11 +105,11 @@ public class GameApp {
     public void createGameList(int count) {
         gameList.clear();
         FlagList fl = new FlagList();
-        if (1 == diff) {
+        if (diff == 1) {
             fl = diff1;
-        } else if (2 == diff) {
+        } else if (diff == 2) {
             fl = diff2;
-        } else if (3 == diff) {
+        } else if (diff == 3) {
             fl = diff3;
         }
         while (gameList.getSize() < count) {
@@ -117,7 +123,7 @@ public class GameApp {
 
     // MODIFIES: this
     // EFFECTS: processes user commands
-    public void run(int start, int count) {
+    public void run(int start, int count) throws NoSavedGameException {
         while (start < count) {
             Flag currentFlag = gameList.getFlag(start);
             System.out.println(currentFlag.getCode());
@@ -164,7 +170,7 @@ public class GameApp {
     }
 
     // EFFECTS: processes end game user commands
-    public void endGame(int correct, int count) {
+    public void endGame(int correct, int count) throws NoSavedGameException {
         System.out.println("You got " + Integer.toString(correct) + "/" + count + " for this round.");
         System.out.println("Would you like to play again? Y/N");
         String again = sc.nextLine();
@@ -172,8 +178,31 @@ public class GameApp {
         while (!end) {
             if (again.equalsIgnoreCase("y")) {
                 end = true;
+                if (loaded) {
+                    System.out.println("You finished your loaded game and it will be deleted.");
+                    System.out.println("You will start a new game.");
+                    try {
+                        jsonWriter.open();
+                        Game currentGame = new Game(new FlagList(), 0, 0 ,0);
+                        jsonWriter.write(currentGame);
+                        jsonWriter.close();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 runGame();
             } else if (again.equalsIgnoreCase("n")) {
+                if (loaded) {
+                    System.out.println("FYI. You finished your loaded game and it will be deleted.");
+                    try {
+                        jsonWriter.open();
+                        Game currentGame = new Game(new FlagList(), 0, 0, 0);
+                        jsonWriter.write(currentGame);
+                        jsonWriter.close();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 System.out.println("Goodbye!");
                 return;
             } else {
@@ -186,7 +215,7 @@ public class GameApp {
 
 
     // EFFECTS: restarts the game
-    public void restartGame() {
+    public void restartGame() throws NoSavedGameException {
         runGame();
     }
 
@@ -202,7 +231,7 @@ public class GameApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    public void runGame() {
+    public void runGame() throws NoSavedGameException {
         inputDifficulty();
         System.out.println("How many countries would you like to guess?");
         int count = parseInt(sc.nextLine());
