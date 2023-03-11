@@ -61,4 +61,7 @@ class GameTest {
         testList.clear();
         assertEquals(0, testList.getSize());
     }
+
+    public static class JSONReaderTest {
+    }
 }

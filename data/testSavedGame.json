@@ -1,0 +1,25 @@
+{
+  "difficulty": 1,
+  "answered": 2,
+  "correct": 2,
+  "gameList": [
+    {
+      "difficulty": 1,
+      "file": "portugal.png",
+      "code": "PT",
+      "name": "Portugal"
+    },
+    {
+      "difficulty": 1,
+      "file": "germany.png",
+      "code": "DE",
+      "name": "Germany"
+    },
+    {
+      "difficulty": 1,
+      "file": "russianfederation.png",
+      "code": "RU",
+      "name": "Russia"
+    }
+  ]
+}
