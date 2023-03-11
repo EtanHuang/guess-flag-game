@@ -73,29 +73,40 @@ public class GameApp {
         }
     }
 
+    public void yesLoadGame() throws NoSavedGameException {
+        try {
+            game = jsonReader.read();
+            this.diff = game.getDifficulty();
+            this.current = game.getAnswered();
+            this.correct = game.getCorrect();
+            this.gameList = game.getGameList();
+            loaded = true;
+            if ((diff == 0) && (current == 0) && (correct == 0) && gameList.getSize() == 0) {
+                throw new NoSavedGameException("You don't have a saved game! You must start a new game.");
+            }
+            System.out.println("Loaded from " + JSON_STORE);
+            showInfo();
+            run(current, game.getGameList().getSize());
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
     public void loadGame() throws NoSavedGameException {
         System.out.println("Would you like to load your game from last time? Y - yes, N - no");
         String yesNo = sc.nextLine();
-        if (yesNo.trim().equalsIgnoreCase("y")) {
-            try {
-                game = jsonReader.read();
-                this.diff = game.getDifficulty();
-                this.current = game.getAnswered();
-                this.correct = game.getCorrect();
-                this.gameList = game.getGameList();
-                loaded = true;
-                if ((diff == 0) && (current == 0) && (correct == 0) && gameList.getSize() == 0) {
-                    throw new NoSavedGameException("You don't have a saved game! You must start a new game.");
-                }
-                System.out.println("Loaded from " + JSON_STORE);
-                showInfo();
-                run(current, game.getGameList().getSize());
-                return;
-            } catch (IOException e) {
-                System.out.println("Unable to read from file: " + JSON_STORE);
+        boolean keepGoing = true;
+        while (keepGoing) {
+            if (yesNo.trim().equalsIgnoreCase("y")) {
+                keepGoing = false;
+                yesLoadGame();
+            } else if (yesNo.trim().equalsIgnoreCase("n")) {
+                keepGoing = false;
+                runGame();
+            } else {
+                System.out.println("Enter Y or N!");
+                yesNo = sc.nextLine();
             }
-        } else {
-            runGame();
         }
     }
 
@@ -148,24 +159,61 @@ public class GameApp {
         endGame(correct, count);
     }
 
+    public void writeCurrentGame(Game g) {
+        jsonWriter.write(g);
+        System.out.println("Your game was successfully saved to " + JSON_STORE + ".");
+        System.out.println("Goodbye!");
+        jsonWriter.close();
+    }
+
     // EFFECTS: displays the quit menu to the user
     public void quitMenu(int start) {
         System.out.println("Would you like to save your game? Y - Yes N - No");
         String yesNo = sc.nextLine();
-        if (yesNo.trim().equalsIgnoreCase("y")) {
-            try {
-                jsonWriter.open();
-                Game currentGame = new Game(gameList, start, correct, diff);
-                jsonWriter.write(currentGame);
-                System.out.println("Your game was successfully saved to " + JSON_STORE + ".");
+        boolean keepGoing = true;
+        while (keepGoing) {
+            if (yesNo.trim().equalsIgnoreCase("y")) {
+                keepGoing = false;
+                try {
+                    jsonWriter.open();
+                    Game currentGame = new Game(gameList, start, correct, diff);
+                    writeCurrentGame(currentGame);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (yesNo.trim().equalsIgnoreCase("n")) {
+                keepGoing = false;
                 System.out.println("Goodbye!");
-                jsonWriter.close();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                return;
+            } else {
+                System.out.println("Enter Y or N!");
+                yesNo = sc.nextLine();
             }
-        } else {
-            System.out.println("Goodbye!");
-            return;
+        }
+    }
+
+    public void deleteSave() throws NoSavedGameException {
+        System.out.println("You finished your loaded game and it will be deleted.");
+        System.out.println("You will start a new game.");
+        try {
+            jsonWriter.open();
+            Game currentGame = new Game(new FlagList(), 0, 0,0);
+            jsonWriter.write(currentGame);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteSave2() throws NoSavedGameException {
+        System.out.println("FYI you finished your loaded game and it was deleted.");
+        try {
+            jsonWriter.open();
+            Game currentGame = new Game(new FlagList(), 0, 0, 0);
+            jsonWriter.write(currentGame);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -179,29 +227,12 @@ public class GameApp {
             if (again.equalsIgnoreCase("y")) {
                 end = true;
                 if (loaded) {
-                    System.out.println("You finished your loaded game and it will be deleted.");
-                    System.out.println("You will start a new game.");
-                    try {
-                        jsonWriter.open();
-                        Game currentGame = new Game(new FlagList(), 0, 0 ,0);
-                        jsonWriter.write(currentGame);
-                        jsonWriter.close();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    deleteSave();
                 }
                 runGame();
             } else if (again.equalsIgnoreCase("n")) {
                 if (loaded) {
-                    System.out.println("FYI. You finished your loaded game and it will be deleted.");
-                    try {
-                        jsonWriter.open();
-                        Game currentGame = new Game(new FlagList(), 0, 0, 0);
-                        jsonWriter.write(currentGame);
-                        jsonWriter.close();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    deleteSave2();
                 }
                 System.out.println("Goodbye!");
                 return;
@@ -253,9 +284,13 @@ public class GameApp {
         }
         createGameList(count);
         showInfo();
-        current = 0;
-        correct = 0;
+        reset();
         run(current, count);
+    }
+
+    public void reset() {
+        this.current = 0;
+        this.correct = 0;
     }
 
     // EFFECTS: displays game commands for the user
