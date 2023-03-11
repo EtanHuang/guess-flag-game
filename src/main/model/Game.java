@@ -3,12 +3,14 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// Represents the state of a game
 public class Game {
     private FlagList flags;
     private int answered;
     private int correct;
     private int difficulty;
 
+    // EFFECTS: constructs a game with a list of flags, number of flags answered so far, correct so far and difficulty
     public Game(FlagList flags, int ans, int correct, int diff) {
         this.flags = flags;
         this.answered = ans;
@@ -16,6 +18,7 @@ public class Game {
         this.difficulty = diff;
     }
 
+    // EFFECTS: returns the fields in game as a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("gameList", flagsToJson());
@@ -25,6 +28,7 @@ public class Game {
         return json;
     }
 
+    // EFFECTS: returns the flags in the game as JSON Array
     public JSONArray flagsToJson() {
         JSONArray flagsArray = new JSONArray();
         for (Flag f : flags.getFlags()) {

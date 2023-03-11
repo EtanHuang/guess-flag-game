@@ -25,9 +25,9 @@ public class GameApp {
     private static final String JSON_STORE = "./data/lastsession.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private int correct;
-    private int current;
-    private int diff;
+    private int correct; // number of flags the user answered correct so far
+    private int current; // number of flags the user answered so far
+    private int diff; // difficulty of current game
     private Game game;
     boolean loaded = false;
 
@@ -73,6 +73,8 @@ public class GameApp {
         }
     }
 
+    // MODIIFES: this
+    // EFFECTS: loads a game from file
     public void yesLoadGame() throws NoSavedGameException {
         try {
             game = jsonReader.read();
@@ -92,6 +94,8 @@ public class GameApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user commands to load a game from file
     public void loadGame() throws NoSavedGameException {
         System.out.println("Would you like to load your game from last time? Y - yes, N - no");
         String yesNo = sc.nextLine();
@@ -159,6 +163,7 @@ public class GameApp {
         endGame(correct, count);
     }
 
+    // EFFECTS: saves current game to file
     public void writeCurrentGame(Game g) {
         jsonWriter.write(g);
         System.out.println("Your game was successfully saved to " + JSON_STORE + ".");
@@ -192,6 +197,7 @@ public class GameApp {
         }
     }
 
+    // EFFECTS: deletes the saved game in file
     public void deleteSave() throws NoSavedGameException {
         System.out.println("You finished your loaded game and it will be deleted.");
         System.out.println("You will start a new game.");
@@ -205,6 +211,7 @@ public class GameApp {
         }
     }
 
+    // EFFECTS: deletes the saved game in file
     public void deleteSave2() throws NoSavedGameException {
         System.out.println("FYI you finished your loaded game and it was deleted.");
         try {
@@ -242,8 +249,6 @@ public class GameApp {
             }
         }
     }
-
-
 
     // EFFECTS: restarts the game
     public void restartGame() throws NoSavedGameException {
@@ -288,6 +293,8 @@ public class GameApp {
         run(current, count);
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets current and correct to 0
     public void reset() {
         this.current = 0;
         this.correct = 0;

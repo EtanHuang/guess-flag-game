@@ -9,7 +9,7 @@ public class Flag {
     private String file; // file name of the png
     private String code; // 2 letter abbreviation of the country name
 
-
+    // EFFECTS: constructs a flags with name, difficulty, file name and 2 letter code fields
     public Flag(String name, String code, String file, int diff) {
         this.name = name;
         this.difficulty = diff;
