@@ -1,10 +1,14 @@
 package persistence;
 
+import model.FlagList;
 import model.Game;
+import model.exceptions.NoSavedGameException;
 import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class JSONReaderTest {
 
@@ -30,6 +34,24 @@ class JSONReaderTest {
             assertEquals(0, g.getCorrect());
         } catch (IOException e) {
             fail("Cannot read file.");
+        }
+    }
+
+    @Test
+    void testNoSavedGame() throws IOException {
+        try {
+            JsonReader jsonReader = new JsonReader("./data/testEmptyGame.JSON");
+            Game game = jsonReader.read();
+            int diff = game.getDifficulty();
+            int current = game.getAnswered();
+            int correct = game.getCorrect();
+            FlagList gameList;
+            gameList = game.getGameList();
+            if ((diff == 0) && (current == 0) && (correct == 0) && gameList.getSize() == 0) {
+                throw new NoSavedGameException("You don't have a saved game! You must start a new game.");
+            }
+        } catch (NoSavedGameException e) {
+            System.out.println("You don't have a saved game! You must start a new game");
         }
     }
 
