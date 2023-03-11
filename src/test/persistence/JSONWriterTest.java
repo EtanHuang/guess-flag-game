@@ -51,7 +51,6 @@ public class JSONWriterTest {
             writer.open();
             writer.write(g);
             writer.close();
-
             reader = new JsonReader("./data/testWriterSavedGame.json");
             Game savedGame = reader.read();
             assertEquals(2, savedGame.getAnswered());
