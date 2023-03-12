@@ -197,6 +197,7 @@ public class GameApp {
         }
     }
 
+    // EFFECTS: prints 2 different versions of delete game messages for 2 situations.
     public void printDeleteGameMessages(int a) {
         if (a == 1) {
             System.out.println("You finished your loaded game and it will be deleted.");

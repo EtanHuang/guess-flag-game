@@ -28,7 +28,7 @@ public class Game {
         return json;
     }
 
-    // EFFECTS: returns the flags in the game as JSON Array
+    // EFFECTS: returns the flags in the game as a JSONArray
     public JSONArray flagsToJson() {
         JSONArray flagsArray = new JSONArray();
         for (Flag f : flags.getFlags()) {

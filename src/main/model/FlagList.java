@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 // Class representation of a list of flags containing Flag objects.
 public class FlagList {
+
+    // ArrayList representation of a collection of flags
     private ArrayList<Flag> flags;
 
     // EFFECTS: creates an empty list to store Flag objects.

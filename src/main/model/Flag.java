@@ -49,6 +49,7 @@ public class Flag {
         this.file = file;
     }
 
+    // returns the fields of a Flag as a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
