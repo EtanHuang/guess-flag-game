@@ -50,6 +50,11 @@ class JSONReaderTest {
             if ((diff == 0) && (current == 0) && (correct == 0) && gameList.getSize() == 0) {
                 throw new NoSavedGameException("You don't have a saved game! You must start a new game.");
             }
+            assertEquals(0, diff);
+            assertEquals(0, current);
+            assertEquals(0, correct);
+            assertEquals(0, gameList.getSize());
+
         } catch (NoSavedGameException e) {
             System.out.println("You don't have a saved game! You must start a new game");
         }

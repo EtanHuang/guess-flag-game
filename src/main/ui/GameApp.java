@@ -17,9 +17,9 @@ import static java.lang.Integer.parseInt;
 
 // Game Application
 public class GameApp {
-    private FlagList diff1 = new FlagList(); // All flags of difficulty 1
-    private FlagList diff2 = new FlagList(); // All flags of difficulty 2
-    private FlagList diff3 = new FlagList(); // All flags of difficulty 3
+    private FlagList easyFlagList = new FlagList(); // All flags of difficulty 1
+    private FlagList mediumFlagList = new FlagList(); // All flags of difficulty 2
+    private FlagList hardFlagList = new FlagList(); // All flags of difficulty 3
     private FlagList gameList = new FlagList(); // Stores flags for a game
     Scanner sc = new Scanner(System.in);
     private static final String JSON_STORE = "./data/lastsession.json";
@@ -63,11 +63,11 @@ public class GameApp {
             String image = vals[2];
             int diff = Integer.parseInt(vals[3]);
             if (diff == 1) {
-                diff1.addFlag(new Flag(name, code, image, diff));
+                easyFlagList.addFlag(new Flag(name, code, image, diff));
             } else if (diff == 2) {
-                diff2.addFlag(new Flag(name, code, image, diff));
+                mediumFlagList.addFlag(new Flag(name, code, image, diff));
             } else if (diff == 3) {
-                diff3.addFlag(new Flag(name, code, image, diff));
+                hardFlagList.addFlag(new Flag(name, code, image, diff));
             }
             line = scan.nextLine();
         }
@@ -121,11 +121,11 @@ public class GameApp {
         gameList.clear();
         FlagList fl = new FlagList();
         if (diff == 1) {
-            fl = diff1;
+            fl = easyFlagList;
         } else if (diff == 2) {
-            fl = diff2;
+            fl = mediumFlagList;
         } else if (diff == 3) {
-            fl = diff3;
+            fl = hardFlagList;
         }
         while (gameList.getSize() < count) {
             Random random = new Random();
@@ -197,26 +197,21 @@ public class GameApp {
         }
     }
 
-    // EFFECTS: deletes the saved game in file
-    public void deleteSave() throws NoSavedGameException {
-        System.out.println("You finished your loaded game and it will be deleted.");
-        System.out.println("You will start a new game.");
-        try {
-            jsonWriter.open();
-            Game currentGame = new Game(new FlagList(), 0, 0,0);
-            jsonWriter.write(currentGame);
-            jsonWriter.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+    public void printDeleteGameMessages(int a) {
+        if (a == 1) {
+            System.out.println("You finished your loaded game and it will be deleted.");
+            System.out.println("You will start a new game.");
+        } else if (a == 2) {
+            System.out.println("FYI you finished your loaded game and it was deleted.");
         }
     }
 
     // EFFECTS: deletes the saved game in file
-    public void deleteSave2() throws NoSavedGameException {
-        System.out.println("FYI you finished your loaded game and it was deleted.");
+    public void deleteSave(int a) throws NoSavedGameException {
+        printDeleteGameMessages(a);
         try {
             jsonWriter.open();
-            Game currentGame = new Game(new FlagList(), 0, 0, 0);
+            Game currentGame = new Game(new FlagList(), 0, 0,0);
             jsonWriter.write(currentGame);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
@@ -234,12 +229,12 @@ public class GameApp {
             if (again.equalsIgnoreCase("y")) {
                 end = true;
                 if (loaded) {
-                    deleteSave();
+                    deleteSave(1);
                 }
                 runGame();
             } else if (again.equalsIgnoreCase("n")) {
                 if (loaded) {
-                    deleteSave2();
+                    deleteSave(2);
                 }
                 System.out.println("Goodbye!");
                 return;
@@ -272,18 +267,18 @@ public class GameApp {
         System.out.println("How many countries would you like to guess?");
         int count = parseInt(sc.nextLine());
         if (1 == diff) {
-            while (count < 0 || count > diff1.getSize()) {
-                System.out.println("Enter a number between 1-" + Integer.toString(diff1.getSize()));
+            while (count < 0 || count > easyFlagList.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(easyFlagList.getSize()));
                 count = parseInt(sc.nextLine());
             }
         } else if (2 == diff) {
-            while (count < 0 || count > diff2.getSize()) {
-                System.out.println("Enter a number between 1-" + Integer.toString(diff2.getSize()));
+            while (count < 0 || count > mediumFlagList.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(mediumFlagList.getSize()));
                 count = parseInt(sc.nextLine());
             }
         } else if (3 == diff) {
-            while (count < 0 || count > diff3.getSize()) {
-                System.out.println("Enter a number between 1-" + Integer.toString(diff3.getSize()));
+            while (count < 0 || count > hardFlagList.getSize()) {
+                System.out.println("Enter a number between 1-" + Integer.toString(hardFlagList.getSize()));
                 count = parseInt(sc.nextLine());
             }
         }
