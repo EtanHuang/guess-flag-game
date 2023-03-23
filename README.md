@@ -14,6 +14,7 @@ Phase 1:
 * As a user, I want to be able to stop my current game and start a new game. 
 * As a user, I want to be able to type in the number of flags I want to guess for each game.  
 * As a user, I want to be able to view the next flag when I skip it or guess the current one correctly. 
+* As a user, I want to be able to delete all flags from the current flag list when I restart a new game. 
 
 
  Phase 2:
