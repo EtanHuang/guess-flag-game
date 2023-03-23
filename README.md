@@ -17,3 +17,10 @@ Phase 1:
  Phase 2:
 * As a user, I want to be able to resume from where I left off in my previous games. 
 * As a user, I want to be able to have the option to save my game to file when I quit.
+
+## Instructions for grader: 
+- You can generate the first required action related to adding Xs to a Y by pressing new game. 
+- You can generate the second required action related to adding Xs to a Y by entering a number of flags you want to guess for your current game. 
+- You can locate my visual component by...
+- You can save the state of my application by clicking the save button. 
+- You can reload the state of my application by opening the game again. 
