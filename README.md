@@ -12,7 +12,8 @@ Phase 1:
 * As a user, I want to be able to type in my guess and receive feedback.
 * As a user, I want to be able to choose between easy, normal and hard mode. 
 * As a user, I want to be able to stop my current game and start a new game. 
-* As a user, I want to be able to add a desired number of flags to a list of flags when starting a new game. 
+* As a user, I want to be able to type in how many flags I want to guess for each game.  
+* As a user, I want to be able to see an answer key if I get stuck. 
 
  Phase 2:
 * As a user, I want to be able to resume from where I left off in my previous games. 
