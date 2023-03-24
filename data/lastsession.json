@@ -1,6 +1,25 @@
 {
-    "difficulty": 0,
+    "difficulty": 1,
     "answered": 0,
     "correct": 0,
-    "gameList": []
+    "gameList": [
+        {
+            "difficulty": 1,
+            "file": "vietnam.png",
+            "code": "VN",
+            "name": "Vietnam"
+        },
+        {
+            "difficulty": 1,
+            "file": "iraq.png",
+            "code": "IQ",
+            "name": "Iraq"
+        },
+        {
+            "difficulty": 1,
+            "file": "greece.png",
+            "code": "GR",
+            "name": "Greece"
+        }
+    ]
 }
