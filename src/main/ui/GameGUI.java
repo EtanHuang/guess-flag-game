@@ -74,16 +74,20 @@ public class GameGUI extends JFrame implements ActionListener {
 
     public void initializePanels() {
         flagPanel = new JPanel();
-        flagPanel.setBounds(300,30,350,200);
+        flagPanel.setBounds(200,30,600,400);
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(250,40));
-        textField.setBounds(300, 300, 100,20);
+        textField.setBounds(450, 500, 100,20);
         mainScreen.add(textField);
     }
 
     public void displayFlag(Flag flag) {
         String route = "data//flags//" + flag.getFile();
         ImageIcon flagImage = new ImageIcon(route);
+        Image flagimg = flagImage.getImage(); // ImageIcon has a method called getImage();
+        Image newimg = flagimg.getScaledInstance(600,420, Image.SCALE_AREA_AVERAGING);
+        flagImage = new ImageIcon(newimg);
+
         flagLabel = new JLabel(flagImage);
         flagPanel.removeAll();
         flagPanel.add(flagLabel);
@@ -93,12 +97,16 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     public void displayNextFlag() {
-        displayFlag(gameList.getFlag(current+1));
-        current+=1;
+        if (current==gameList.getSize()-1) {
+            JOptionPane.showMessageDialog(f,
+                    "You got " + Integer.toString(correct) + " out of " + gameList.getSize(),
+                    "",
+                    JOptionPane.PLAIN_MESSAGE);
+        } else {
+            current++;
+            displayFlag(gameList.getFlag(current));
+        }
     }
-
-    // figure out how to get the flag onto the panel and when I click skip it shows the next flag
-
 
     // when user opens the game they should be asked do they want to load
     // if there is no saved game starts a new game and ask the user difficulty and number of flags
@@ -113,7 +121,6 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     public void createGameList(int count, int diff) {
-        //this.gameList.clear();
         FlagList fl = new FlagList();
         if (diff == 1) {
             fl = g.easyFlagList;
@@ -129,9 +136,6 @@ public class GameGUI extends JFrame implements ActionListener {
                 gameList.addFlag(fl.getFlag(number));
             }
         }
-//        for (int i=0; i<gameList.getSize(); i++) {
-//            System.out.println(gameList.getFlag(i).getName());
-//        }
     }
 
     public void setButtonActions() {
@@ -152,14 +156,7 @@ public class GameGUI extends JFrame implements ActionListener {
         System.out.println(e.getActionCommand());
         switch(e.getActionCommand()) {
             case "Submit":
-                String answer = textField.getText().trim();
-                System.out.println(answer);
-                System.out.println(gameList.getFlag(current).getName());
-                // compare the typed answer to the current flag's value
-                if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
-                    System.out.println("Correct");
-                    displayNextFlag();
-                }
+                checkAnswer();
                 break;
             case "Save":
                 saveGame();
@@ -177,6 +174,22 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+
+    public void checkAnswer() {
+        String answer = textField.getText().trim();
+        System.out.println(answer);
+        //System.out.println(gameList.getFlag(current).getName());
+        if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
+            System.out.println("Correct");
+            displayNextFlag();
+            this.correct++;
+            this.current++;
+            textField.setText("");
+        } else {
+            System.out.println("Wrong!");
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: launches popup menu that prompts user to save their game
     public void saveGameAction() {
@@ -187,23 +200,23 @@ public class GameGUI extends JFrame implements ActionListener {
     public void addButtons() {
         save = new JButton();
         save.setText("Save");
-        save.setBounds(200,200,70,30);
+        save.setBounds(50,200,70,30);
         mainScreen.add(save);
         submit = new JButton();
         submit.setText("Submit");
-        submit.setBounds(200,300,70,30);
+        submit.setBounds(50,300,70,30);
         mainScreen.add(submit);
         restart = new JButton();
         restart.setText("Restart");
-        restart.setBounds(200,400,70,30);
+        restart.setBounds(50,400,70,30);
         mainScreen.add(restart);
         skip = new JButton();
         skip.setText("Skip");
-        skip.setBounds(200,450,70,30);
+        skip.setBounds(50,450,70,30);
         mainScreen.add(skip);
         quit = new JButton();
         quit.setText("Quit");
-        quit.setBounds(200,500,70,30);
+        quit.setBounds(50,500,70,30);
         mainScreen.add(quit);
     }
 

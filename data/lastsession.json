@@ -1,25 +1,25 @@
 {
     "difficulty": 1,
-    "answered": 0,
+    "answered": 2,
     "correct": 0,
     "gameList": [
         {
             "difficulty": 1,
-            "file": "vietnam.png",
-            "code": "VN",
-            "name": "Vietnam"
+            "file": "norway.png",
+            "code": "NO",
+            "name": "Norway"
         },
         {
             "difficulty": 1,
-            "file": "iraq.png",
-            "code": "IQ",
-            "name": "Iraq"
+            "file": "turkey.png",
+            "code": "TR",
+            "name": "Turkey"
         },
         {
             "difficulty": 1,
-            "file": "greece.png",
-            "code": "GR",
-            "name": "Greece"
+            "file": "nepal.png",
+            "code": "NP",
+            "name": "Nepal"
         }
     ]
 }
