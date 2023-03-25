@@ -20,8 +20,8 @@ Phase 1:
 * As a user, I want to be able to have the option to save my game to file when I quit.
 
 ## Instructions for grader: 
-- You can generate the first required action related to adding Xs to a Y by guessing the flag correctly or skipping it. 
-- You can generate the second required action related to adding Xs to a Y by finishing a game and you will be prompted to start a new game. 
+- You can generate the first required action related to adding Xs to a Y by guessing the flag correctly or skipping it. (view the next X)
+- You can generate the second required action related to adding Xs to a Y by finishing a game and you will be prompted to start a new game. (delete all Xs from Y and adding a new set of Xs to Y)
 - You can locate my visual component by...
 - You can save the state of my application by clicking the save button. 
 - You can reload the state of my application by opening the game again and you will be prompted to load your game. 
