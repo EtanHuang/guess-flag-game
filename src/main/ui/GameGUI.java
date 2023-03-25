@@ -65,11 +65,12 @@ public class GameGUI extends JFrame implements ActionListener {
         addButtons();
         setButtonActions();
         initializePanels();
+
         f.add(mainScreen);
 
         // we want to have the same flag lists, be able to randomly choose flags, and get the flag images for the image panel.
         f.setVisible(true);
-
+        startGame();
     }
 
     public void initializePanels() {
@@ -102,6 +103,7 @@ public class GameGUI extends JFrame implements ActionListener {
                     "You got " + Integer.toString(correct) + " out of " + gameList.getSize(),
                     "",
                     JOptionPane.PLAIN_MESSAGE);
+            endGame();
         } else {
             current++;
             displayFlag(gameList.getFlag(current));
@@ -112,6 +114,9 @@ public class GameGUI extends JFrame implements ActionListener {
     // if there is no saved game starts a new game and ask the user difficulty and number of flags
 
     public void startGame() {
+        gameList.clear();
+        this.correct = 0;
+        this.current = 0;
         String diff = JOptionPane.showInputDialog("Please enter a difficulty");
         this.difficulty = Integer.parseInt(diff);
         String c = JOptionPane.showInputDialog("How many flags?");
@@ -169,6 +174,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 startGame();
                 break;
             case "Skip":
+                this.textField.setText("");
                 displayNextFlag();
                 break;
         }
@@ -178,12 +184,10 @@ public class GameGUI extends JFrame implements ActionListener {
     public void checkAnswer() {
         String answer = textField.getText().trim();
         System.out.println(answer);
-        //System.out.println(gameList.getFlag(current).getName());
         if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
+            this.correct++;
             System.out.println("Correct");
             displayNextFlag();
-            this.correct++;
-            this.current++;
             textField.setText("");
         } else {
             System.out.println("Wrong!");
@@ -193,7 +197,14 @@ public class GameGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: launches popup menu that prompts user to save their game
     public void saveGameAction() {
-
+        int n = JOptionPane.showConfirmDialog(f, "Would you like to save your game?", "",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            saveGame();
+            f.dispose();
+        } else {
+            f.dispose();
+        }
     }
 
     // use an abstract class for the buttons
@@ -237,17 +248,18 @@ public class GameGUI extends JFrame implements ActionListener {
 
     }
 
-    // method for difficulty
-    public void generateFlagList() {
-
-    }
 
     // method for ending a game
     // I need to tell the user their score, ask them do you want to play again like my console app
     // and input the difficulty and number of flags (basically starts a new game)
     public void endGame() {
-        startGame();
+        int n = JOptionPane.showConfirmDialog(f, "Would you like to play again?", "",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            startGame();
+        }
+        if (n == JOptionPane.NO_OPTION) {
+            f.dispose();
+        }
     }
-
-
 }

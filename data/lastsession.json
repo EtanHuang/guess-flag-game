@@ -1,25 +1,31 @@
 {
     "difficulty": 1,
     "answered": 2,
-    "correct": 0,
+    "correct": 2,
     "gameList": [
         {
             "difficulty": 1,
-            "file": "norway.png",
-            "code": "NO",
-            "name": "Norway"
+            "file": "netherlands.png",
+            "code": "NL",
+            "name": "Netherlands"
         },
         {
             "difficulty": 1,
-            "file": "turkey.png",
-            "code": "TR",
-            "name": "Turkey"
+            "file": "hongkong.png",
+            "code": "HK",
+            "name": "Hong Kong"
         },
         {
             "difficulty": 1,
-            "file": "nepal.png",
-            "code": "NP",
-            "name": "Nepal"
+            "file": "poland.png",
+            "code": "PL",
+            "name": "Poland"
+        },
+        {
+            "difficulty": 1,
+            "file": "thailand.png",
+            "code": "TH",
+            "name": "Thailand"
         }
     ]
 }
