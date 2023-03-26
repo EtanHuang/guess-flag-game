@@ -29,17 +29,17 @@ public class GameGUI extends JFrame implements ActionListener {
     private JButton restart;
     private JButton skip;
     private JButton quit;
-    private Boolean gameOver;
+    //private Boolean gameOver;
 
     private int difficulty;
     private int count;
     private int correct; // number of flags the user answered correct so far
     private int current; // number of flags the user answered so far
 
-    private JLabel flagImage;
+    //private JLabel flagImage;
     private JTextField textField;
 
-    private Flag currentFlag;
+    //private Flag currentFlag;
     private FlagList gameList = new FlagList();
     private Boolean savedGame;
     private Game game;
