@@ -1,25 +1,6 @@
 {
-    "difficulty": 1,
-    "answered": 2,
-    "correct": 2,
-    "gameList": [
-        {
-            "difficulty": 1,
-            "file": "mexico.png",
-            "code": "MX",
-            "name": "Mexico"
-        },
-        {
-            "difficulty": 1,
-            "file": "nepal.png",
-            "code": "NP",
-            "name": "Nepal"
-        },
-        {
-            "difficulty": 1,
-            "file": "norway.png",
-            "code": "NO",
-            "name": "Norway"
-        }
-    ]
+    "difficulty": 0,
+    "answered": 0,
+    "correct": 0,
+    "gameList": []
 }

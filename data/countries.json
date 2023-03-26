@@ -1073,7 +1073,7 @@
   },
   {
 	"id": 108,
-    "name": "Lao Peoples Democratic Republic",
+    "name": "Laos",
     "code": "LA",
     "capital": "Vientiane",
     "region": "AS",
@@ -1163,7 +1163,7 @@
   },
   {
 	"id": 117,
-    "name": "Macao",
+    "name": "Macau",
     "code": "MO",
     "capital": "",
     "region": "AS",
@@ -1173,7 +1173,7 @@
   },
   {
 	"id": 118,
-    "name": "Macedonia (the former Yugoslav Republic of)",
+    "name": "Macedonia",
     "code": "MK",
     "capital": "Skopje",
     "region": "EU",
@@ -1303,7 +1303,7 @@
   },
   {
 	"id": 131,
-    "name": "Micronesia (Federated States of)",
+    "name": "Micronesia",
     "code": "FM",
     "capital": "Palikir",
     "region": "OC",
@@ -1313,7 +1313,7 @@
   },
   {
 	"id": 132,
-    "name": "Moldova (Republic of)",
+    "name": "Moldova",
     "code": "MD",
     "capital": "Chișinău",
     "region": "EU",
@@ -1503,7 +1503,7 @@
   },
   {
 	"id": 151,
-    "name": "Korea (Democratic People's Republic of)",
+    "name": "North Korea",
     "code": "KP",
     "capital": "Pyongyang",
     "region": "AS",
