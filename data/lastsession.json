@@ -5,27 +5,21 @@
     "gameList": [
         {
             "difficulty": 1,
-            "file": "netherlands.png",
-            "code": "NL",
-            "name": "Netherlands"
+            "file": "mexico.png",
+            "code": "MX",
+            "name": "Mexico"
         },
         {
             "difficulty": 1,
-            "file": "hongkong.png",
-            "code": "HK",
-            "name": "Hong Kong"
+            "file": "nepal.png",
+            "code": "NP",
+            "name": "Nepal"
         },
         {
             "difficulty": 1,
-            "file": "poland.png",
-            "code": "PL",
-            "name": "Poland"
-        },
-        {
-            "difficulty": 1,
-            "file": "thailand.png",
-            "code": "TH",
-            "name": "Thailand"
+            "file": "norway.png",
+            "code": "NO",
+            "name": "Norway"
         }
     ]
 }

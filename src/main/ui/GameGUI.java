@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 public class GameGUI extends JFrame implements ActionListener {
@@ -42,6 +43,8 @@ public class GameGUI extends JFrame implements ActionListener {
 
     private Flag currentFlag;
     private FlagList gameList = new FlagList();
+    private Boolean savedGame;
+    private Game game;
 
     // easy medium and hard flag lists are in globals
     Globals g = new Globals();
@@ -70,6 +73,7 @@ public class GameGUI extends JFrame implements ActionListener {
 
         // we want to have the same flag lists, be able to randomly choose flags, and get the flag images for the image panel.
         f.setVisible(true);
+
         startGame();
     }
 
@@ -82,6 +86,7 @@ public class GameGUI extends JFrame implements ActionListener {
         mainScreen.add(textField);
     }
 
+    // code referenced from https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     public void displayFlag(Flag flag) {
         String route = "data//flags//" + flag.getFile();
         ImageIcon flagImage = new ImageIcon(route);
@@ -98,7 +103,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     public void displayNextFlag() {
-        if (current==gameList.getSize()-1) {
+        if (current == gameList.getSize()-1) {
             JOptionPane.showMessageDialog(f,
                     "You got " + Integer.toString(correct) + " out of " + gameList.getSize(),
                     "",
@@ -114,15 +119,39 @@ public class GameGUI extends JFrame implements ActionListener {
     // if there is no saved game starts a new game and ask the user difficulty and number of flags
 
     public void startGame() {
-        gameList.clear();
-        this.correct = 0;
-        this.current = 0;
-        String diff = JOptionPane.showInputDialog("Please enter a difficulty");
-        this.difficulty = Integer.parseInt(diff);
-        String c = JOptionPane.showInputDialog("How many flags?");
-        this.count = Integer.parseInt(c);
-        createGameList(count, difficulty);
-        displayFlag(gameList.getFlag(0));
+        // determine if the user has a saved game and ask the user to load if yes
+        // else just start a new game
+        savedGame = false;
+        try {
+            game = jsonReader.read();
+            if (game.getDifficulty() != 0) {
+                savedGame = true;
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        if (savedGame) {
+            int n = JOptionPane.showConfirmDialog(f, "You have a saved game. Would you like to load it?", "",
+                    JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION) {
+                this.gameList = game.getGameList();
+                this.correct = game.getCorrect();
+                this.current = game.getAnswered();
+                this.difficulty = game.getDifficulty();
+                displayFlag(gameList.getFlag(current));
+            }
+            if (n == JOptionPane.NO_OPTION) {
+                gameList.clear();
+                this.correct = 0;
+                this.current = 0;
+                String diff = JOptionPane.showInputDialog("Please enter a difficulty"); // make sure diff is an integer [1,3]
+                this.difficulty = Integer.parseInt(diff);
+                String c = JOptionPane.showInputDialog("How many flags?");
+                this.count = Integer.parseInt(c);
+                createGameList(count, difficulty);
+                displayFlag(gameList.getFlag(0));
+            }
+        }
     }
 
     public void createGameList(int count, int diff) {
@@ -167,8 +196,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 saveGame();
                 break;
             case "Quit":
-                saveGameAction();
-                // prompts the user to save the game and quits application
+                quitGameAction();
                 break;
             case "Restart":
                 startGame();
@@ -196,8 +224,8 @@ public class GameGUI extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: launches popup menu that prompts user to save their game
-    public void saveGameAction() {
-        int n = JOptionPane.showConfirmDialog(f, "Would you like to save your game?", "",
+    public void quitGameAction() {
+        int n = JOptionPane.showConfirmDialog(f, "Would you like to save your game before you quit?", "",
                 JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION) {
             saveGame();
@@ -243,15 +271,6 @@ public class GameGUI extends JFrame implements ActionListener {
         jsonWriter.close();
     }
 
-    // method for load
-    public void loadGame() {
-
-    }
-
-
-    // method for ending a game
-    // I need to tell the user their score, ask them do you want to play again like my console app
-    // and input the difficulty and number of flags (basically starts a new game)
     public void endGame() {
         int n = JOptionPane.showConfirmDialog(f, "Would you like to play again?", "",
                 JOptionPane.YES_NO_OPTION);
