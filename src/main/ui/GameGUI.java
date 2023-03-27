@@ -138,10 +138,10 @@ public class GameGUI extends JFrame implements ActionListener {
         gameList.clear();
         this.correct = 0;
         this.current = 0;
-        String diff = JOptionPane.showInputDialog("Please enter a difficulty between 1-3");
+        String diff = "";
         do {
             diff = JOptionPane.showInputDialog("Please enter a difficulty between 1-3");
-        } while (Integer.parseInt(diff) <= 0 || Integer.parseInt(diff) > 3);
+        } while (Integer.parseInt(diff) < 1 || Integer.parseInt(diff) > 3);
         this.difficulty = Integer.parseInt(diff);
         inputNumberOfFlags();
         createGameList(count, difficulty);
@@ -149,27 +149,25 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     public void inputNumberOfFlags() {
+        String c = "";
         if (this.difficulty == 1) {
-            String c = JOptionPane.showInputDialog("How many flags? Enter between 1-44.");
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-44");
             } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.easyFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 2) {
-            String c = JOptionPane.showInputDialog("How many flags? Enter between 1-25.");
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-25.");
             } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.mediumFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 3) {
-            String c = JOptionPane.showInputDialog("How many flags? Enter between 1-144.");
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-144.");
             } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.hardFlagList.getSize());
             this.count = Integer.parseInt(c);
         }
-
     }
+
 
     public void createGameList(int count, int diff) {
         FlagList fl = new FlagList();
