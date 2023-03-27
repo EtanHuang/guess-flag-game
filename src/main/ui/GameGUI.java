@@ -198,7 +198,6 @@ public class GameGUI extends JFrame implements ActionListener {
         skip.setActionCommand("Skip");
         quit.addActionListener(this);
         quit.setActionCommand("Quit");
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -214,7 +213,12 @@ public class GameGUI extends JFrame implements ActionListener {
                 quitGameAction();
                 break;
             case "Restart":
-                startGame();
+                int n = JOptionPane.showConfirmDialog(frame, "You are starting a new game. "
+                        + "Your current game will be lost", "Restart", JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION) {
+                    clearJsonSave();
+                    createGame();
+                }
                 break;
             case "Skip":
                 this.textField.setText("");
@@ -250,7 +254,6 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
-    // use an abstract class for the buttons
     public void addButtons() {
         save = new JButton();
         save.setText("Save");
@@ -286,10 +289,7 @@ public class GameGUI extends JFrame implements ActionListener {
         jsonWriter.close();
     }
 
-    public void endGame() {
-        int n = JOptionPane.showConfirmDialog(frame, "Would you like to play again?", "",
-                JOptionPane.YES_NO_OPTION);
-        // I need to clear the json save if the game ends
+    public void clearJsonSave() {
         try {
             jsonWriter.open();
             game = new Game(new FlagList(), 0, 0,0);
@@ -298,6 +298,13 @@ public class GameGUI extends JFrame implements ActionListener {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void endGame() {
+        int n = JOptionPane.showConfirmDialog(frame, "Would you like to play again?", "",
+                JOptionPane.YES_NO_OPTION);
+        // I need to clear the json save if the game ends
+        clearJsonSave();
         if (n == JOptionPane.YES_OPTION) {
             savedGame = false;
             startGame();
