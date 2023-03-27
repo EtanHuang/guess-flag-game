@@ -29,17 +29,14 @@ public class GameGUI extends JFrame implements ActionListener {
     private JButton restart;
     private JButton skip;
     private JButton quit;
-    //private Boolean gameOver;
 
     private int difficulty;
     private int count;
     private int correct; // number of flags the user answered correct so far
     private int current; // number of flags the user answered so far
 
-    //private JLabel flagImage;
     private JTextField textField;
 
-    //private Flag currentFlag;
     private FlagList gameList = new FlagList();
     private Boolean savedGame = false;
     private Game game;
@@ -201,7 +198,6 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
         switch (e.getActionCommand()) {
             case "Submit":
                 checkAnswer();
@@ -230,7 +226,6 @@ public class GameGUI extends JFrame implements ActionListener {
 
     public void checkAnswer() {
         String answer = textField.getText().trim();
-        System.out.println(answer);
         if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
             this.correct++;
             System.out.println("Correct");
