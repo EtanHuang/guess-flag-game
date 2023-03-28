@@ -1,6 +1,5 @@
 package ui;
 
-import model.Globals;
 import model.exceptions.NoSavedGameException;
 
 public class Main {
@@ -8,8 +7,6 @@ public class Main {
 
     public static void main(String[] args) throws NoSavedGameException {
         new GameGUI();
-        Globals g = new Globals();
-        g.scanFile();
 //        try {
 //            g = new GameApp();
 //            g.loadGame();

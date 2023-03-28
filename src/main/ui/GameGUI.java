@@ -3,7 +3,6 @@ package ui;
 import model.Flag;
 import model.FlagList;
 import model.Game;
-import model.Globals;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -11,9 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameGUI extends JFrame implements ActionListener {
 
@@ -25,6 +26,10 @@ public class GameGUI extends JFrame implements ActionListener {
     private JLabel flagLabel;
     private JLabel correctWrong;
     private JLabel mainBackground;
+
+    private FlagList easyFlagList = new FlagList(); // All flags of difficulty 1
+    private FlagList mediumFlagList = new FlagList(); // All flags of difficulty 2
+    private FlagList hardFlagList = new FlagList(); // All flags of difficulty 3
 
     private JButton save;
     private JButton submit;
@@ -43,9 +48,6 @@ public class GameGUI extends JFrame implements ActionListener {
     private Boolean savedGame = false;
     private Game game;
 
-    // easy medium and hard flag lists are in globals
-    Globals globals = new Globals();
-
     JsonWriter jsonWriter;
     JsonReader jsonReader;
 
@@ -53,7 +55,7 @@ public class GameGUI extends JFrame implements ActionListener {
     public GameGUI() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        globals.scanFile();
+        scanFile();
         correctWrong = new JLabel("");
         correctWrong.setBounds(840,90,100,50);
         frame = new JFrame("Flag Guessing Game");
@@ -93,6 +95,38 @@ public class GameGUI extends JFrame implements ActionListener {
         textField.setPreferredSize(new Dimension(100,40));
         textField.setBounds(790, 50, 180,40);
         mainScreen.add(textField);
+    }
+
+    public void scanFile() {
+        Scanner scan;
+        try {
+            scan = new Scanner(new File("data\\countries.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        addFlags(scan);
+    }
+
+    public void addFlags(Scanner scan) {
+        String line = scan.nextLine();
+        while (line != null) {
+            if (line.equals("break")) {
+                break;
+            }
+            String[] vals = line.split(",");
+            String name = vals[0];
+            String code = vals[1];
+            String image = vals[2];
+            int diff = Integer.parseInt(vals[3]);
+            if (diff == 1) {
+                easyFlagList.addFlag(new Flag(name, code, image, diff));
+            } else if (diff == 2) {
+                mediumFlagList.addFlag(new Flag(name, code, image, diff));
+            } else if (diff == 3) {
+                hardFlagList.addFlag(new Flag(name, code, image, diff));
+            }
+            line = scan.nextLine();
+        }
     }
 
     // code referenced from https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
@@ -173,33 +207,32 @@ public class GameGUI extends JFrame implements ActionListener {
         if (this.difficulty == 1) {
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-"
-                + Integer.toString(globals.easyFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.easyFlagList.getSize());
+                + Integer.toString(easyFlagList.getSize()));
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= easyFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 2) {
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-"
-                        + Integer.toString(globals.mediumFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.mediumFlagList.getSize());
+                        + Integer.toString(mediumFlagList.getSize()));
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= mediumFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 3) {
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1- "
-                        + Integer.toString(globals.hardFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= globals.hardFlagList.getSize());
+                        + Integer.toString(hardFlagList.getSize()));
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= hardFlagList.getSize());
             this.count = Integer.parseInt(c);
         }
     }
 
-
     public void createGameList(int count, int diff) {
         FlagList fl = new FlagList();
         if (diff == 1) {
-            fl = globals.easyFlagList;
+            fl = easyFlagList;
         } else if (diff == 2) {
-            fl = globals.mediumFlagList;
+            fl = mediumFlagList;
         } else if (diff == 3) {
-            fl = globals.hardFlagList;
+            fl = hardFlagList;
         }
         while (gameList.getSize() < count) {
             Random random = new Random();
