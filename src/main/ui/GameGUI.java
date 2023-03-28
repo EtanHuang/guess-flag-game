@@ -16,9 +16,10 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+// GUI representation of Game
 public class GameGUI extends JFrame implements ActionListener {
 
-    private static final String JSON_STORE = "./data/lastsession.json";
+    private static final String JSON_STORE = "./data/lastsession.json"; // address to store saved game
 
     private JFrame frame;
     private JPanel mainScreen;
@@ -31,27 +32,28 @@ public class GameGUI extends JFrame implements ActionListener {
     private FlagList mediumFlagList = new FlagList(); // All flags of difficulty 2
     private FlagList hardFlagList = new FlagList(); // All flags of difficulty 3
 
+    // buttons to handle user interaction
     private JButton save;
     private JButton submit;
     private JButton restart;
     private JButton skip;
     private JButton quit;
 
-    private int difficulty;
-    private int count;
+    private int difficulty; // difficulty of current game
+    private int count; // number of flags in current game
     private int correct; // number of flags the user answered correct so far
     private int current; // number of flags the user answered so far
 
-    private JTextField textField;
+    private JTextField textField; // textfield for user input answers
 
-    private FlagList gameList = new FlagList();
+    private FlagList gameList = new FlagList(); // list of flags for current game
     private Boolean savedGame = false;
     private Game game;
 
     JsonWriter jsonWriter;
     JsonReader jsonReader;
 
-
+    // EFFECTS: Initializes and creates the game GUI
     public GameGUI() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -73,6 +75,8 @@ public class GameGUI extends JFrame implements ActionListener {
         startGame();
     }
 
+    // MODIIFES: this
+    // EFFECTS: Adds an image to the background
     public void initializeBackground() {
         ImageIcon backgroundImg = new ImageIcon("C:\\Users\\Public\\Documents\\project_v7w0e\\"
                 + "data\\e4eafd10-b723-4f9d-8b33-e62b59d2b724.jpg");
@@ -87,6 +91,8 @@ public class GameGUI extends JFrame implements ActionListener {
         mainScreen.add(mainBackground);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the flag panel and textfield
     public void initializePanels() {
         flagPanel = new JPanel();
         flagPanel.setBounds(25,25,750,500);
@@ -107,6 +113,8 @@ public class GameGUI extends JFrame implements ActionListener {
         addFlags(scan);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds each flag to its difficulty's list
     public void addFlags(Scanner scan) {
         String line = scan.nextLine();
         while (line != null) {
@@ -129,6 +137,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays the current flag on screen
     // code referenced from https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     public void displayFlag(Flag flag) {
         String route = "data//flags//" + flag.getFile();
@@ -148,6 +158,8 @@ public class GameGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays the next flag on screen
     public void displayNextFlag() {
         // finished game
         if (current == gameList.getSize() - 1) {
@@ -162,6 +174,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts the game
     public void startGame() {
         try {
             game = jsonReader.read();
@@ -188,6 +202,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts a new game
     public void createGame() {
         gameList.clear();
         this.correct = 0;
@@ -202,6 +218,8 @@ public class GameGUI extends JFrame implements ActionListener {
         displayFlag(gameList.getFlag(0));
     }
 
+    // MODIFIES: this
+    // EFFECTS: takes user input for number of flags
     public void inputNumberOfFlags() {
         String c = "";
         if (this.difficulty == 1) {
@@ -225,6 +243,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates list of flags for the game
     public void createGameList(int count, int diff) {
         FlagList fl = new FlagList();
         if (diff == 1) {
@@ -243,6 +263,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets button actions
     public void setButtonActions() {
         submit.addActionListener(this);
         submit.setActionCommand("Submit");
@@ -256,6 +278,8 @@ public class GameGUI extends JFrame implements ActionListener {
         quit.setActionCommand("Quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: does corresponding actions on button click
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Submit":
@@ -281,6 +305,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: action for skip button
     public void skipAction() {
         this.textField.setText("");
         correctWrong.setText("");
@@ -288,7 +314,8 @@ public class GameGUI extends JFrame implements ActionListener {
         displayNextFlag();
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: checks user entered answer
     public void checkAnswer() {
         String answer = textField.getText().trim();
         if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
@@ -320,6 +347,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds buttons to frame
     public void addButtons() {
         save = new JButton();
         save.setText("Save");
@@ -343,6 +372,8 @@ public class GameGUI extends JFrame implements ActionListener {
         mainBackground.add(skip);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds buttons to frame
     public void addButtons2() {
         quit = new JButton();
         quit.setText("Quit");
@@ -351,7 +382,8 @@ public class GameGUI extends JFrame implements ActionListener {
         mainBackground.add(quit);
     }
 
-    // method for save
+    // MODIFIES: this
+    // EFFECTS: saves the game
     public void saveGame() {
         try {
             jsonWriter.open();
@@ -363,6 +395,7 @@ public class GameGUI extends JFrame implements ActionListener {
         jsonWriter.close();
     }
 
+    // EFFECTS: clears the currently saved game
     public void clearJsonSave() {
         try {
             jsonWriter.open();
@@ -374,6 +407,8 @@ public class GameGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes end game commands
     public void endGame() {
         int n = JOptionPane.showConfirmDialog(frame, "Would you like to play again?", "",
                 JOptionPane.YES_NO_OPTION);
