@@ -23,6 +23,8 @@ public class GameGUI extends JFrame implements ActionListener {
     private JPanel mainScreen;
     private JPanel flagPanel;
     private JLabel flagLabel;
+    private JLabel correctWrong;
+    private JLabel mainBackground;
 
     private JButton save;
     private JButton submit;
@@ -47,18 +49,30 @@ public class GameGUI extends JFrame implements ActionListener {
     JsonWriter jsonWriter;
     JsonReader jsonReader;
 
+
     public GameGUI() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         globals.scanFile();
+        correctWrong = new JLabel("");
+        correctWrong.setBounds(840,90,100,50);
         frame = new JFrame("Flag Guessing Game");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(1000,600);
         frame.setResizable(false);
+        ImageIcon backgroundImg = new ImageIcon("C:\\Users\\Public\\Documents\\project_v7w0e\\" +
+                "data\\e4eafd10-b723-4f9d-8b33-e62b59d2b724.jpg");
+        Image img = backgroundImg.getImage();
+        Image scaledImg = img.getScaledInstance(1000,600, Image.SCALE_SMOOTH);
+        backgroundImg = new ImageIcon(scaledImg);
+        mainBackground = new JLabel("");
+        mainBackground.setIcon(backgroundImg);
+        mainBackground.setBounds(0,0,1000,600);
         mainScreen = new JPanel();
-        mainScreen.setBackground(Color.lightGray);
         mainScreen.setLayout(null);
+        mainScreen.add(mainBackground);
         addButtons();
+        mainScreen.add(correctWrong);
         setButtonActions();
         initializePanels();
         frame.add(mainScreen);
@@ -68,24 +82,28 @@ public class GameGUI extends JFrame implements ActionListener {
 
     public void initializePanels() {
         flagPanel = new JPanel();
-        flagPanel.setBounds(200,30,600,400);
+        flagPanel.setBounds(25,25,750,500);
         textField = new JTextField();
-        textField.setPreferredSize(new Dimension(250,40));
-        textField.setBounds(450, 500, 100,20);
+        textField.setFont(new Font("Consolas", Font.PLAIN, 25));
+        textField.setPreferredSize(new Dimension(100,40));
+        textField.setBounds(790, 50, 180,40);
         mainScreen.add(textField);
     }
 
     // code referenced from https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     public void displayFlag(Flag flag) {
         String route = "data//flags//" + flag.getFile();
+        flagLabel = new JLabel();
         ImageIcon flagImage = new ImageIcon(route);
-        Image flagimg = flagImage.getImage(); // ImageIcon has a method called getImage();
-        Image newimg = flagimg.getScaledInstance(600,420, Image.SCALE_AREA_AVERAGING);
+        Image flagimg = flagImage.getImage();
+        Image newimg = flagimg.getScaledInstance(750,500, Image.SCALE_DEFAULT);
         flagImage = new ImageIcon(newimg);
-
-        flagLabel = new JLabel(flagImage);
+        flagLabel.setIcon(flagImage);
         flagPanel.removeAll();
         flagPanel.add(flagLabel);
+
+        //how to get rid of the white space on top
+        //flagPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
         mainScreen.add(flagPanel);
         frame.add(mainScreen);
         frame.setVisible(true);
@@ -218,6 +236,8 @@ public class GameGUI extends JFrame implements ActionListener {
                 break;
             case "Skip":
                 this.textField.setText("");
+                correctWrong.setText("");
+                mainBackground.add(correctWrong);
                 displayNextFlag();
                 break;
         }
@@ -228,11 +248,17 @@ public class GameGUI extends JFrame implements ActionListener {
         String answer = textField.getText().trim();
         if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
             this.correct++;
-            System.out.println("Correct");
+            correctWrong.setForeground(Color.green);
+            correctWrong.setText("Correct!");
+            correctWrong.setFont(new Font("Serif", Font.PLAIN, 25));
+            mainBackground.add(correctWrong);
             displayNextFlag();
             textField.setText("");
         } else {
-            System.out.println("Wrong!");
+            correctWrong.setForeground(Color.red);
+            correctWrong.setText("Wrong!");
+            correctWrong.setFont(new Font("Serif", Font.PLAIN, 25));
+            mainBackground.add(correctWrong);
         }
     }
 
@@ -252,24 +278,29 @@ public class GameGUI extends JFrame implements ActionListener {
     public void addButtons() {
         save = new JButton();
         save.setText("Save");
-        save.setBounds(50,200,70,30);
-        mainScreen.add(save);
+        save.setBounds(825,200,100,40);
+        save.setBackground(Color.white);
+        mainBackground.add(save);
         submit = new JButton();
         submit.setText("Submit");
-        submit.setBounds(50,300,70,30);
-        mainScreen.add(submit);
+        submit.setBounds(825,250,100,40);
+        submit.setBackground(Color.white);
+        mainBackground.add(submit);
         restart = new JButton();
         restart.setText("Restart");
-        restart.setBounds(50,400,70,30);
-        mainScreen.add(restart);
+        restart.setBounds(825,300,100,40);
+        restart.setBackground(Color.white);
+        mainBackground.add(restart);
         skip = new JButton();
         skip.setText("Skip");
-        skip.setBounds(50,450,70,30);
-        mainScreen.add(skip);
+        skip.setBounds(825,350,100,40);
+        skip.setBackground(Color.white);
+        mainBackground.add(skip);
         quit = new JButton();
         quit.setText("Quit");
-        quit.setBounds(50,500,70,30);
-        mainScreen.add(quit);
+        quit.setBounds(825,400,100,40);
+        quit.setBackground(Color.white);
+        mainBackground.add(quit);
     }
 
     // method for save
@@ -298,7 +329,6 @@ public class GameGUI extends JFrame implements ActionListener {
     public void endGame() {
         int n = JOptionPane.showConfirmDialog(frame, "Would you like to play again?", "",
                 JOptionPane.YES_NO_OPTION);
-        // I need to clear the json save if the game ends
         clearJsonSave();
         if (n == JOptionPane.YES_OPTION) {
             savedGame = false;
