@@ -279,7 +279,6 @@ public class GameGUI extends JFrame implements ActionListener {
         quit.setActionCommand("Quit");
     }
 
-
     // MODIFIES: this
     // EFFECTS: does corresponding actions on button click
     public void actionPerformed(ActionEvent e) {
