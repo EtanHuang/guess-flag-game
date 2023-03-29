@@ -22,6 +22,6 @@ Phase 1:
 ## Instructions for grader: 
 - You can generate the first required action related to adding Xs to a Y by guessing the flag correctly or skipping it. (view the next X)
 - You can generate the second required action related to adding Xs to a Y by finishing a game and you will be prompted to start a new game. (delete all Xs from Y and adding a new set of Xs to Y)
-- You can locate my visual component by...
+- You can locate my visual component by running the main class.
 - You can save the state of my application by clicking the save button. 
 - You can reload the state of my application by opening the game again and you will be prompted to load your game. 
