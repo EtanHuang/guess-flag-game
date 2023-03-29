@@ -25,7 +25,7 @@ public class GameGUI extends JFrame implements ActionListener {
     private JPanel mainScreen;
     private JPanel flagPanel;
     private JLabel flagLabel;
-    private JLabel correctWrong;
+    private JLabel correctWrongLabel;
     private JLabel mainBackground;
 
     private FlagList easyFlagList = new FlagList(); // All flags of difficulty 1
@@ -33,11 +33,11 @@ public class GameGUI extends JFrame implements ActionListener {
     private FlagList hardFlagList = new FlagList(); // All flags of difficulty 3
 
     // buttons to handle user interaction
-    private JButton save;
-    private JButton submit;
-    private JButton restart;
-    private JButton skip;
-    private JButton quit;
+    private JButton btnSave;
+    private JButton btnSubmit;
+    private JButton btnRestart;
+    private JButton btnSkip;
+    private JButton btnQuit;
 
     private int difficulty; // difficulty of current game
     private int count; // number of flags in current game
@@ -58,14 +58,14 @@ public class GameGUI extends JFrame implements ActionListener {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         scanFile();
-        correctWrong = new JLabel("");
-        correctWrong.setBounds(840,90,100,50);
+        correctWrongLabel = new JLabel("");
+        correctWrongLabel.setBounds(840,90,100,50);
         frame = new JFrame("Flag Guessing Game");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(1000,600);
         frame.setResizable(false);
         initializeBackground();
-        mainScreen.add(correctWrong);
+        mainScreen.add(correctWrongLabel);
         addButtons();
         addButtons2();
         setButtonActions();
@@ -78,8 +78,7 @@ public class GameGUI extends JFrame implements ActionListener {
     // MODIIFES: this
     // EFFECTS: Adds an image to the background
     public void initializeBackground() {
-        ImageIcon backgroundImg = new ImageIcon("C:\\Users\\Public\\Documents\\project_v7w0e\\"
-                + "data\\e4eafd10-b723-4f9d-8b33-e62b59d2b724.jpg");
+        ImageIcon backgroundImg = new ImageIcon("data/e4eafd10-b723-4f9d-8b33-e62b59d2b724.jpg");
         Image img = backgroundImg.getImage();
         Image scaledImg = img.getScaledInstance(1000,600, Image.SCALE_SMOOTH);
         backgroundImg = new ImageIcon(scaledImg);
@@ -140,20 +139,14 @@ public class GameGUI extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: displays the current flag on screen
-    // code referenced from https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     public void displayFlag(Flag flag) {
         String route = "data//flags//" + flag.getFile();
-        flagLabel = new JLabel();
         ImageIcon flagImage = new ImageIcon(route);
-        Image flagimg = flagImage.getImage();
-        Image newimg = flagimg.getScaledInstance(750,500, Image.SCALE_DEFAULT);
-        flagImage = new ImageIcon(newimg);
-        flagLabel.setIcon(flagImage);
+        flagImage.setImage(flagImage.getImage().getScaledInstance(750,500, Image.SCALE_SMOOTH));
+        flagLabel = new JLabel(flagImage);
+        flagLabel.setLocation(10,10);
         flagPanel.removeAll();
         flagPanel.add(flagLabel);
-
-        //how to get rid of the white space on top
-        //flagPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
         mainScreen.add(flagPanel);
         frame.add(mainScreen);
         frame.setVisible(true);
@@ -267,16 +260,16 @@ public class GameGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets button actions
     public void setButtonActions() {
-        submit.addActionListener(this);
-        submit.setActionCommand("Submit");
-        save.addActionListener(this);
-        save.setActionCommand("Save");
-        restart.addActionListener(this);
-        restart.setActionCommand("Restart");
-        skip.addActionListener(this);
-        skip.setActionCommand("Skip");
-        quit.addActionListener(this);
-        quit.setActionCommand("Quit");
+        btnSubmit.addActionListener(this);
+        btnSubmit.setActionCommand("Submit");
+        btnSave.addActionListener(this);
+        btnSave.setActionCommand("Save");
+        btnRestart.addActionListener(this);
+        btnRestart.setActionCommand("Restart");
+        btnSkip.addActionListener(this);
+        btnSkip.setActionCommand("Skip");
+        btnQuit.addActionListener(this);
+        btnQuit.setActionCommand("Quit");
     }
 
     // MODIFIES: this
@@ -310,8 +303,8 @@ public class GameGUI extends JFrame implements ActionListener {
     // EFFECTS: action for skip button
     public void skipAction() {
         this.textField.setText("");
-        correctWrong.setText("");
-        mainBackground.add(correctWrong);
+        correctWrongLabel.setText("");
+        mainBackground.add(correctWrongLabel);
         displayNextFlag();
     }
 
@@ -321,17 +314,17 @@ public class GameGUI extends JFrame implements ActionListener {
         String answer = textField.getText().trim();
         if (gameList.getFlag(current).getName().equalsIgnoreCase(answer)) {
             this.correct++;
-            correctWrong.setForeground(Color.green);
-            correctWrong.setText("Correct!");
-            correctWrong.setFont(new Font("Serif", Font.PLAIN, 25));
-            mainBackground.add(correctWrong);
+            correctWrongLabel.setForeground(Color.green);
+            correctWrongLabel.setText("Correct!");
+            correctWrongLabel.setFont(new Font("Serif", Font.PLAIN, 25));
+            mainBackground.add(correctWrongLabel);
             displayNextFlag();
             textField.setText("");
         } else {
-            correctWrong.setForeground(Color.red);
-            correctWrong.setText("Wrong!");
-            correctWrong.setFont(new Font("Serif", Font.PLAIN, 25));
-            mainBackground.add(correctWrong);
+            correctWrongLabel.setForeground(Color.red);
+            correctWrongLabel.setText("Wrong!");
+            correctWrongLabel.setFont(new Font("Serif", Font.PLAIN, 25));
+            mainBackground.add(correctWrongLabel);
         }
     }
 
@@ -351,36 +344,36 @@ public class GameGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: adds buttons to frame
     public void addButtons() {
-        save = new JButton();
-        save.setText("Save");
-        save.setBounds(825,200,100,40);
-        save.setBackground(Color.white);
-        mainBackground.add(save);
-        submit = new JButton();
-        submit.setText("Submit");
-        submit.setBounds(825,250,100,40);
-        submit.setBackground(Color.white);
-        mainBackground.add(submit);
-        restart = new JButton();
-        restart.setText("Restart");
-        restart.setBounds(825,300,100,40);
-        restart.setBackground(Color.white);
-        mainBackground.add(restart);
-        skip = new JButton();
-        skip.setText("Skip");
-        skip.setBounds(825,350,100,40);
-        skip.setBackground(Color.white);
-        mainBackground.add(skip);
+        btnSave = new JButton();
+        btnSave.setText("Save");
+        btnSave.setBounds(825,200,100,40);
+        btnSave.setBackground(Color.white);
+        mainBackground.add(btnSave);
+        btnSubmit = new JButton();
+        btnSubmit.setText("Submit");
+        btnSubmit.setBounds(825,250,100,40);
+        btnSubmit.setBackground(Color.white);
+        mainBackground.add(btnSubmit);
+        btnRestart = new JButton();
+        btnRestart.setText("Restart");
+        btnRestart.setBounds(825,300,100,40);
+        btnRestart.setBackground(Color.white);
+        mainBackground.add(btnRestart);
+        btnSkip = new JButton();
+        btnSkip.setText("Skip");
+        btnSkip.setBounds(825,350,100,40);
+        btnSkip.setBackground(Color.white);
+        mainBackground.add(btnSkip);
     }
 
     // MODIFIES: this
     // EFFECTS: adds buttons to frame
     public void addButtons2() {
-        quit = new JButton();
-        quit.setText("Quit");
-        quit.setBounds(825,400,100,40);
-        quit.setBackground(Color.white);
-        mainBackground.add(quit);
+        btnQuit = new JButton();
+        btnQuit.setText("Quit");
+        btnQuit.setBounds(825,400,100,40);
+        btnQuit.setBackground(Color.white);
+        mainBackground.add(btnQuit);
     }
 
     // MODIFIES: this
