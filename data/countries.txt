@@ -104,7 +104,7 @@ Libya,LY,libya.png,3
 Liechtenstein,LI,liechtenstein.png,3
 Lithuania,LT,lithuania.png,3
 Luxembourg,LU,luxembourg.png,3
-Macao,MO,macao.png,2
+Macau,MO,macao.png,2
 Macedonia,MK,republicofnorthmacedonia.png,3
 Madagascar,MG,madagascar.png,3
 Malawi,MW,malawi.png,3

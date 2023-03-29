@@ -113,6 +113,7 @@ public class GameGUI extends JFrame implements ActionListener {
         addFlags(scan);
     }
 
+
     // MODIFIES: this
     // EFFECTS: adds each flag to its difficulty's list
     public void addFlags(Scanner scan) {
@@ -277,6 +278,7 @@ public class GameGUI extends JFrame implements ActionListener {
         quit.addActionListener(this);
         quit.setActionCommand("Quit");
     }
+
 
     // MODIFIES: this
     // EFFECTS: does corresponding actions on button click
