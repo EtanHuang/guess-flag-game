@@ -27,6 +27,7 @@ public class GameGUI extends JFrame implements ActionListener {
     private JLabel flagLabel;
     private JLabel correctWrongLabel;
     private JLabel mainBackground;
+    private JLabel currentFlagLabel;
 
     private FlagList easyFlagList = new FlagList(); // All flags of difficulty 1
     private FlagList mediumFlagList = new FlagList(); // All flags of difficulty 2
@@ -38,6 +39,7 @@ public class GameGUI extends JFrame implements ActionListener {
     private JButton btnRestart;
     private JButton btnSkip;
     private JButton btnQuit;
+    private JButton btnAnswerKey;
 
     private int difficulty; // difficulty of current game
     private int count; // number of flags in current game
@@ -60,12 +62,15 @@ public class GameGUI extends JFrame implements ActionListener {
         scanFile();
         correctWrongLabel = new JLabel("");
         correctWrongLabel.setBounds(840,90,100,50);
+        currentFlagLabel = new JLabel("");
+        currentFlagLabel.setBounds(840, 140, 130, 50);
         frame = new JFrame("Flag Guessing Game");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(1000,600);
         frame.setResizable(false);
         initializeBackground();
-        mainScreen.add(correctWrongLabel);
+        mainBackground.add(correctWrongLabel);
+        mainBackground.add(currentFlagLabel);
         addButtons();
         addButtons2();
         setButtonActions();
@@ -91,7 +96,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates the flag panel and textfield
+    // EFFECTS: creates the flag panel and textfields
     public void initializePanels() {
         flagPanel = new JPanel();
         flagPanel.setBounds(25,25,750,500);
@@ -165,6 +170,10 @@ public class GameGUI extends JFrame implements ActionListener {
         } else {
             current++;
             displayFlag(gameList.getFlag(current));
+            currentFlagLabel.setForeground(Color.white);
+            currentFlagLabel.setText("Flag " + Integer.toString(current + 1) + "/" + count);
+            currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
+            mainBackground.add(currentFlagLabel);
         }
     }
 
@@ -208,6 +217,10 @@ public class GameGUI extends JFrame implements ActionListener {
         } while (Integer.parseInt(diff) < 1 || Integer.parseInt(diff) > 3);
         this.difficulty = Integer.parseInt(diff);
         inputNumberOfFlags();
+        currentFlagLabel.setText("Flag 1/" + count);
+        currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
+        currentFlagLabel.setForeground(Color.white);
+        mainBackground.add(currentFlagLabel);
         createGameList(count, difficulty);
         displayFlag(gameList.getFlag(0));
     }
@@ -220,19 +233,19 @@ public class GameGUI extends JFrame implements ActionListener {
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-"
                 + Integer.toString(easyFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= easyFlagList.getSize());
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) > easyFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 2) {
             do {
                 c = JOptionPane.showInputDialog("How many flags? Enter between 1-"
                         + Integer.toString(mediumFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= mediumFlagList.getSize());
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) > mediumFlagList.getSize());
             this.count = Integer.parseInt(c);
         } else if (this.difficulty == 3) {
             do {
-                c = JOptionPane.showInputDialog("How many flags? Enter between 1- "
+                c = JOptionPane.showInputDialog("How many flags? Enter between 1-"
                         + Integer.toString(hardFlagList.getSize()));
-            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) >= hardFlagList.getSize());
+            } while (Integer.parseInt(c) <= 0 || Integer.parseInt(c) > hardFlagList.getSize());
             this.count = Integer.parseInt(c);
         }
     }
@@ -270,6 +283,8 @@ public class GameGUI extends JFrame implements ActionListener {
         btnSkip.setActionCommand("Skip");
         btnQuit.addActionListener(this);
         btnQuit.setActionCommand("Quit");
+        btnAnswerKey.addActionListener(this);
+        btnAnswerKey.setActionCommand("Answer");
     }
 
     // MODIFIES: this
@@ -286,17 +301,36 @@ public class GameGUI extends JFrame implements ActionListener {
                 quitGameAction();
                 break;
             case "Restart":
-                int n = JOptionPane.showConfirmDialog(frame, "You are starting a new game. "
-                        + "Your current game will be lost", "Restart", JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.YES_OPTION) {
-                    clearJsonSave();
-                    createGame();
-                }
+                restartAction();
                 break;
             case "Skip":
                 skipAction();
                 break;
+            case "Answer":
+                String answerKey = generateAnswers();
+                JOptionPane.showMessageDialog(frame, answerKey, "Answer Key", JOptionPane.PLAIN_MESSAGE);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user interaction when Restart button is clicked
+    public void restartAction() {
+        int n = JOptionPane.showConfirmDialog(frame, "You are starting a new game. "
+                + "Your current game will be lost", "Restart", JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            clearJsonSave();
+            createGame();
+        }
+    }
+
+    // EFFECTS: generates a String with the names of all the flags in current game
+    public String generateAnswers() {
+        String answers = "";
+        for (int i = 0; i < gameList.getSize(); i++) {
+            answers += Integer.toString(i + 1)  + ". " + gameList.getFlag(i).getName() + "\n";
+        }
+
+        return answers;
     }
 
     // MODIFIES: this
@@ -346,22 +380,22 @@ public class GameGUI extends JFrame implements ActionListener {
     public void addButtons() {
         btnSave = new JButton();
         btnSave.setText("Save");
-        btnSave.setBounds(825,200,100,40);
+        btnSave.setBounds(830,200,100,40);
         btnSave.setBackground(Color.white);
         mainBackground.add(btnSave);
         btnSubmit = new JButton();
         btnSubmit.setText("Submit");
-        btnSubmit.setBounds(825,250,100,40);
+        btnSubmit.setBounds(830,250,100,40);
         btnSubmit.setBackground(Color.white);
         mainBackground.add(btnSubmit);
         btnRestart = new JButton();
         btnRestart.setText("Restart");
-        btnRestart.setBounds(825,300,100,40);
+        btnRestart.setBounds(830,300,100,40);
         btnRestart.setBackground(Color.white);
         mainBackground.add(btnRestart);
         btnSkip = new JButton();
         btnSkip.setText("Skip");
-        btnSkip.setBounds(825,350,100,40);
+        btnSkip.setBounds(830,350,100,40);
         btnSkip.setBackground(Color.white);
         mainBackground.add(btnSkip);
     }
@@ -371,9 +405,14 @@ public class GameGUI extends JFrame implements ActionListener {
     public void addButtons2() {
         btnQuit = new JButton();
         btnQuit.setText("Quit");
-        btnQuit.setBounds(825,400,100,40);
+        btnQuit.setBounds(830,400,100,40);
         btnQuit.setBackground(Color.white);
         mainBackground.add(btnQuit);
+        btnAnswerKey = new JButton();
+        btnAnswerKey.setText("Answer Key");
+        btnAnswerKey.setBounds(830,450,100,40);
+        btnAnswerKey.setBackground(Color.white);
+        mainBackground.add(btnAnswerKey);
     }
 
     // MODIFIES: this
