@@ -217,11 +217,11 @@ public class GameGUI extends JFrame implements ActionListener {
         } while (Integer.parseInt(diff) < 1 || Integer.parseInt(diff) > 3);
         this.difficulty = Integer.parseInt(diff);
         inputNumberOfFlags();
+        createGameList(count, difficulty);
         currentFlagLabel.setText("Flag 1/" + gameList.getSize());
         currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
         currentFlagLabel.setForeground(Color.white);
         mainBackground.add(currentFlagLabel);
-        createGameList(count, difficulty);
         displayFlag(gameList.getFlag(0));
     }
 
