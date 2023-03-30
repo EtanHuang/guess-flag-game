@@ -152,6 +152,10 @@ public class GameGUI extends JFrame implements ActionListener {
         flagLabel.setLocation(10,10);
         flagPanel.removeAll();
         flagPanel.add(flagLabel);
+        currentFlagLabel.setForeground(Color.white);
+        currentFlagLabel.setText("Flag " + Integer.toString(current + 1) + "/" + gameList.getSize());
+        currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
+        mainBackground.add(currentFlagLabel);
         mainScreen.add(flagPanel);
         frame.add(mainScreen);
         frame.setVisible(true);
@@ -170,10 +174,6 @@ public class GameGUI extends JFrame implements ActionListener {
         } else {
             current++;
             displayFlag(gameList.getFlag(current));
-            currentFlagLabel.setForeground(Color.white);
-            currentFlagLabel.setText("Flag " + Integer.toString(current + 1) + "/" + count);
-            currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
-            mainBackground.add(currentFlagLabel);
         }
     }
 
@@ -217,7 +217,7 @@ public class GameGUI extends JFrame implements ActionListener {
         } while (Integer.parseInt(diff) < 1 || Integer.parseInt(diff) > 3);
         this.difficulty = Integer.parseInt(diff);
         inputNumberOfFlags();
-        currentFlagLabel.setText("Flag 1/" + count);
+        currentFlagLabel.setText("Flag 1/" + gameList.getSize());
         currentFlagLabel.setFont(new Font("Serif", Font.PLAIN, 25));
         currentFlagLabel.setForeground(Color.white);
         mainBackground.add(currentFlagLabel);
