@@ -173,6 +173,8 @@ public class GameGUI extends JFrame implements ActionListener {
             endGame();
         } else {
             current++;
+            Game currentGame = new Game(gameList, current + 1, correct, difficulty);
+            currentGame.logDisplayNextFlag();
             displayFlag(gameList.getFlag(current));
         }
     }
@@ -268,6 +270,9 @@ public class GameGUI extends JFrame implements ActionListener {
                 gameList.addFlag(fl.getFlag(number));
             }
         }
+        Game currentGame = new Game(gameList, 1, correct, difficulty);
+        currentGame.logGameCreated();
+        currentGame.logDisplayNextFlag();
     }
 
     // MODIFIES: this
@@ -373,6 +378,8 @@ public class GameGUI extends JFrame implements ActionListener {
         } else {
             frame.dispose();
         }
+        Game currentGame = new Game(gameList, current, correct, difficulty);
+        currentGame.printLog();
     }
 
     // MODIFIES: this
