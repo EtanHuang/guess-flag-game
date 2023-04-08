@@ -33,7 +33,7 @@ Fri Apr 07 21:41:54 PDT 2023<br />
 Guessed Flag #1 correctly out of 5<br />
 Fri Apr 07 21:41:56 PDT 2023<br />
 Guessed Flag #2 correctly out of 5<br />
-Fri Apr 07 21:41:56 PDT 2023<br /><br />
+Fri Apr 07 21:41:56 PDT 2023<br />
 Skipped Flag #3 out of 5<br />
 Fri Apr 07 21:41:58 PDT 2023<br />
 Skipped Flag #4 out of 5<br />
