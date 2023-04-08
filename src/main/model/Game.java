@@ -55,14 +55,23 @@ public class Game {
 
     public void logGameCreated() {
         EventLog.getInstance().logEvent(new Event("Created a new game with "
-         + flags.getSize() + " flags and difficulty " + difficulty));
+                + flags.getSize() + " flags and difficulty " + difficulty));
     }
 
-
-    public void logDisplayNextFlag() {
-        EventLog.getInstance().logEvent(new Event("Displayed Flag #" + this.answered +
-                " out of " + flags.getSize()));
+    public void skipNextFlag() {
+        EventLog.getInstance().logEvent(new Event("Skipped Flag #" + this.answered
+                + " out of " + flags.getSize()));
     }
+
+    public void logGuessFlagCorrect() {
+        EventLog.getInstance().logEvent(new Event("Guessed Flag #" + this.answered
+                + " correctly out of " + flags.getSize()));
+    }
+
+//    public void logDisplayNextFlag() {
+//        EventLog.getInstance().logEvent(new Event("Displayed Flag #" + this.answered +
+//                " out of " + flags.getSize()));
+//    }
 
     public void printLog() {
         EventLog.getInstance().printAllEvents();

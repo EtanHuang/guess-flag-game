@@ -176,8 +176,6 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
             endGame();
         } else {
             current++;
-            Game currentGame = new Game(gameList, current + 1, correct, difficulty);
-            currentGame.logDisplayNextFlag();
             displayFlag(gameList.getFlag(current));
         }
     }
@@ -275,7 +273,6 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
         }
         Game currentGame = new Game(gameList, 1, correct, difficulty);
         currentGame.logGameCreated();
-        currentGame.logDisplayNextFlag();
     }
 
     // MODIFIES: this
@@ -347,6 +344,8 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
         this.textField.setText("");
         correctWrongLabel.setText("");
         mainBackground.add(correctWrongLabel);
+        Game currentGame = new Game(gameList, current + 1, correct, difficulty);
+        currentGame.skipNextFlag();
         displayNextFlag();
     }
 
@@ -360,6 +359,8 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
             correctWrongLabel.setText("Correct!");
             correctWrongLabel.setFont(new Font("Serif", Font.PLAIN, 25));
             mainBackground.add(correctWrongLabel);
+            Game currentGame = new Game(gameList, current + 1, correct, difficulty);
+            currentGame.logGuessFlagCorrect();
             displayNextFlag();
             textField.setText("");
         } else {
@@ -478,8 +479,7 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
 
     @Override
     public void windowClosed(WindowEvent e) {
-//        Game currentGame = new Game(gameList, current, correct, difficulty);
-//        currentGame.printLog();
+
     }
 
     @Override
