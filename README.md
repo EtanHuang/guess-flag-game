@@ -29,16 +29,16 @@ Phase 1:
 Phase 4: Task 2
 Fri Apr 07 21:35:57 PDT 2023<br />
 Created a new game with 4 flags and difficulty 1<br />
-Fri Apr 07 21:35:57 PDT 2023
-Displayed Flag #1 out of 4
-Fri Apr 07 21:36:00 PDT 2023
-Displayed Flag #2 out of 4
-Fri Apr 07 21:36:03 PDT 2023
-Displayed Flag #3 out of 4
-Fri Apr 07 21:36:04 PDT 2023
-Displayed Flag #4 out of 4
-Fri Apr 07 21:36:12 PDT 2023
-Created a new game with 5 flags and difficulty 1
-Fri Apr 07 21:36:12 PDT 2023
-Displayed Flag #1 out of 5
+Fri Apr 07 21:35:57 PDT 2023<br />
+Displayed Flag #1 out of 4<br />
+Fri Apr 07 21:36:00 PDT 2023<br />
+Displayed Flag #2 out of 4<br />
+Fri Apr 07 21:36:03 PDT 2023<br />
+Displayed Flag #3 out of 4<br />
+Fri Apr 07 21:36:04 PDT 2023<br />
+Displayed Flag #4 out of 4<br />
+Fri Apr 07 21:36:12 PDT 2023<br />
+Created a new game with 5 flags and difficulty 1<br />
+Fri Apr 07 21:36:12 PDT 2023<br />
+Displayed Flag #1 out of 5<br />
 
