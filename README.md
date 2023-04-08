@@ -27,18 +27,16 @@ Phase 1:
 - You can reload the state of my application by re-opening the game and you will be prompted to load your game. 
 
 Phase 4: Task 2<br />
-Fri Apr 07 21:35:57 PDT 2023<br />
-Created a new game with 4 flags and difficulty 1<br />
-Fri Apr 07 21:35:57 PDT 2023<br />
-Displayed Flag #1 out of 4<br />
-Fri Apr 07 21:36:00 PDT 2023<br />
-Displayed Flag #2 out of 4<br />
-Fri Apr 07 21:36:03 PDT 2023<br />
-Displayed Flag #3 out of 4<br />
-Fri Apr 07 21:36:04 PDT 2023<br />
-Displayed Flag #4 out of 4<br />
-Fri Apr 07 21:36:12 PDT 2023<br />
+Fri Apr 07 21:41:52 PDT 2023<br />
 Created a new game with 5 flags and difficulty 1<br />
-Fri Apr 07 21:36:12 PDT 2023<br />
-Displayed Flag #1 out of 5<br />
+Fri Apr 07 21:41:54 PDT 2023<br />
+Guessed Flag #1 correctly out of 5<br />
+Fri Apr 07 21:41:56 PDT 2023<br />
+Guessed Flag #2 correctly out of 5<br />
+Fri Apr 07 21:41:56 PDT 2023<br /><br />
+Skipped Flag #3 out of 5<br />
+Fri Apr 07 21:41:58 PDT 2023<br />
+Skipped Flag #4 out of 5<br />
+
+
 
