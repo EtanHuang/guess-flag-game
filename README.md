@@ -25,3 +25,18 @@ Phase 1:
 - You can locate my visual component in the flag panel and the background image. 
 - You can save the state of my application by clicking the save button or press Yes when you click Quit button and it asks "Would you like to save your game". 
 - You can reload the state of my application by re-opening the game and you will be prompted to load your game. 
+
+Phase 4: Task 2<br />
+Fri Apr 07 21:41:52 PDT 2023<br />
+Created a new game with 5 flags and difficulty 1<br />
+Fri Apr 07 21:41:54 PDT 2023<br />
+Guessed Flag #1 correctly out of 5<br />
+Fri Apr 07 21:41:56 PDT 2023<br />
+Guessed Flag #2 correctly out of 5<br />
+Fri Apr 07 21:41:56 PDT 2023<br />
+Skipped Flag #3 out of 5<br />
+Fri Apr 07 21:41:58 PDT 2023<br />
+Skipped Flag #4 out of 5<br />
+
+
+
