@@ -478,8 +478,8 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
 
     @Override
     public void windowClosed(WindowEvent e) {
-        Game currentGame = new Game(gameList, current, correct, difficulty);
-        currentGame.printLog();
+//        Game currentGame = new Game(gameList, current, correct, difficulty);
+//        currentGame.printLog();
     }
 
     @Override
