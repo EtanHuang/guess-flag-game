@@ -27,8 +27,8 @@ Phase 1:
 - You can reload the state of my application by re-opening the game and you will be prompted to load your game. 
 
 Phase 4: Task 2
-Fri Apr 07 21:35:57 PDT 2023
-Created a new game with 4 flags and difficulty 1
+Fri Apr 07 21:35:57 PDT 2023<br />
+Created a new game with 4 flags and difficulty 1<br />
 Fri Apr 07 21:35:57 PDT 2023
 Displayed Flag #1 out of 4
 Fri Apr 07 21:36:00 PDT 2023
