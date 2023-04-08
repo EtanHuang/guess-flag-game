@@ -26,7 +26,7 @@ Phase 1:
 - You can save the state of my application by clicking the save button or press Yes when you click Quit button and it asks "Would you like to save your game". 
 - You can reload the state of my application by re-opening the game and you will be prompted to load your game. 
 
-Phase 4: Task 2
+Phase 4: Task 2<br />
 Fri Apr 07 21:35:57 PDT 2023<br />
 Created a new game with 4 flags and difficulty 1<br />
 Fri Apr 07 21:35:57 PDT 2023<br />
