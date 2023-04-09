@@ -28,7 +28,7 @@ Phase 1:
 
 Phase 4: Task 2<br />
 Fri Apr 07 21:41:52 PDT 2023<br />
-Created a new game with 5 flags and difficulty 1<br />
+Created a new game with the flags Poland, Iran, Japan, China, Canada.<br />
 Fri Apr 07 21:41:54 PDT 2023<br />
 Guessed Flag #1 correctly out of 5<br />
 Fri Apr 07 21:41:56 PDT 2023<br />
