@@ -59,8 +59,8 @@ public class Game {
             flagsNames += f.getName() + ", ";
         }
         int i = flagsNames.length() - 2;
-        EventLog.getInstance().logEvent(new Event("Created a new game with the flags " +
-                flagsNames.substring(0,i) + "."));
+        EventLog.getInstance().logEvent(new Event("Created a new game with the flags "
+                + flagsNames.substring(0,i) + "."));
     }
 
     public void skipNextFlag() {
