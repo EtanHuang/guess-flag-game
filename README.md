@@ -39,5 +39,4 @@ Fri Apr 07 21:41:58 PDT 2023<br />
 Skipped Flag #4 out of 5<br />
 <br /><br />
 Phase 4: Task 3<br />
-If I had more time to work on my project, I would...
-
+If I had more time to work on my project, one refactoring actions I would perform is the Single Responsibility Principle. Looking at my UML Diagram, I just have one single class, GameGUI, that represents every function of the game. The GameGUI class has too many responsibilities that can definitely be split into multiple classes. It makes sense for the GameGUI to only contain properties and functions that make up the GUI itself. 
