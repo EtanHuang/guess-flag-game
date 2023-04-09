@@ -68,11 +68,6 @@ public class Game {
                 + " correctly out of " + flags.getSize()));
     }
 
-//    public void logDisplayNextFlag() {
-//        EventLog.getInstance().logEvent(new Event("Displayed Flag #" + this.answered +
-//                " out of " + flags.getSize()));
-//    }
-
     public void printLog() {
         EventLog.getInstance().printAllEvents();
     }

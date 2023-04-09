@@ -3,8 +3,9 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
+
 /**
- * Represents an event performed by the user
+ * Represents an alarm system event.
  */
 
 // Code referenced from https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
@@ -35,24 +36,22 @@ public class Event {
      * Gets the description of this event.
      * @return  the description of the event
      */
-    public String getDescription() {
+    public String getDescription () {
         return description;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
+        if (other == null)
             return false;
-        }
 
-        if (other.getClass() != this.getClass()) {
+        if (other.getClass() != this.getClass())
             return false;
-        }
 
         Event otherEvent = (Event) other;
 
-        return (this.dateLogged.equals(otherEvent.dateLogged)
-                && this.description.equals(otherEvent.description));
+        return (this.dateLogged.equals(otherEvent.dateLogged) &&
+                this.description.equals(otherEvent.description));
     }
 
     @Override
