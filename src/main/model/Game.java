@@ -54,8 +54,13 @@ public class Game {
     }
 
     public void logGameCreated() {
-        EventLog.getInstance().logEvent(new Event("Created a new game with "
-                + flags.getSize() + " flags and difficulty " + difficulty));
+        String flagsNames = "";
+        for (Flag f : flags.getFlags()) {
+            flagsNames += f.getName() + ", ";
+        }
+        int i = flagsNames.length() - 2;
+        EventLog.getInstance().logEvent(new Event("Created a new game with the flags " +
+                flagsNames.substring(0,i) + "."));
     }
 
     public void skipNextFlag() {
