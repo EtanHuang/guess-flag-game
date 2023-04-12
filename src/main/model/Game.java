@@ -63,7 +63,7 @@ public class Game {
                 + flagsNames.substring(0,i) + "."));
     }
 
-    public void skipNextFlag() {
+    public void logSkipNextFlag() {
         EventLog.getInstance().logEvent(new Event("Skipped Flag #" + this.answered
                 + " out of " + flags.getSize()));
     }

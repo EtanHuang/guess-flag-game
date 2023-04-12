@@ -345,7 +345,7 @@ public class GameGUI extends JFrame implements ActionListener, WindowListener {
         correctWrongLabel.setText("");
         mainBackground.add(correctWrongLabel);
         Game currentGame = new Game(gameList, current + 1, correct, difficulty);
-        currentGame.skipNextFlag();
+        currentGame.logSkipNextFlag();
         displayNextFlag();
     }
 
