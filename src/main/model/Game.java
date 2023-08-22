@@ -76,5 +76,4 @@ public class Game {
     public void printLog() {
         EventLog.getInstance().printAllEvents();
     }
-
 }
