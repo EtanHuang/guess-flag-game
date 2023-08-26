@@ -67,7 +67,6 @@ public class Game {
         EventLog.getInstance().logEvent(new Event("Skipped Flag #" + this.answered
                 + " out of " + flags.getSize()));
     }
-
     public void logGuessFlagCorrect() {
         EventLog.getInstance().logEvent(new Event("Guessed Flag #" + this.answered
                 + " correctly out of " + flags.getSize()));
