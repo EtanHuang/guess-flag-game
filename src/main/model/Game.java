@@ -72,7 +72,6 @@ public class Game {
         EventLog.getInstance().logEvent(new Event("Guessed Flag #" + this.answered
                 + " correctly out of " + flags.getSize()));
     }
-
     public void printLog() {
         EventLog.getInstance().printAllEvents();
     }
